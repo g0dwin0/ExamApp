@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-public class ExamAdminstration {
+public class ExamAdministration {
 
     private final Scanner READER = new Scanner(System.in);
     private final Menu MENU = new Menu();
 
     public void startProgram() {
-        MENU.showMenu();
+        Menu.showMenu();
 
         String Choise = READER.nextLine();
         //System.out.println("Enter your menu choise");

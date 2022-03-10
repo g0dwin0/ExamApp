@@ -1,19 +1,22 @@
 public class Student {
-    private String naam;
-    private Integer studentnummer;
+
+    private String studentName;
+    private String studentNumber;
     private static Integer volgNummer = 1; // TODO: Uniek maken, lees uit tekst bestand
 
-    public Student(String naam) {
-        this.naam = naam;
-        this.studentnummer = volgNummer;
+    public Student(String studentName, String studentNumber) {
+        this.studentName = studentName;
+        this.studentNumber = studentNumber;
         volgNummer++;
     }
 
     public String getNaam() {
-        return naam;
+        return studentName;
     }
 
+    public String getStudentnummer() { return  studentNumber;}
+
     public void setNaam(String naam) {
-        this.naam = naam;
+        this.studentName = naam;
     }
 }
