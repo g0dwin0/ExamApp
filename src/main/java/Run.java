@@ -2,6 +2,9 @@ import com.google.gson.Gson;
 
 public class Run {
     public static void main(String[] args) {
+
+        ExamAdminstration examAdminstration = new ExamAdminstration();
+        examAdminstration.startProgram();
         Gson serializer = new Gson();
         Student godwin = new Student("Godwin");
         String json = serializer.toJson(godwin);
