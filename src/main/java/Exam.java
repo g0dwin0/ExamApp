@@ -5,15 +5,19 @@ import java.util.Scanner;
 public class Exam {
     private String naam;
     private Integer aantalJuisteAntwoorden = 0;
-    private ArrayList<Vraag> vragen = new ArrayList<>();
+    private ArrayList<Vraag> vragen;
     private ArrayList<Resultaat> resultaten;
     private Integer minimumCorrect;
 
+    public Exam(String naam, ArrayList<Vraag> vragen){
+        this.naam = naam;
+        this.vragen = vragen;
+    }
     public void startExam(Student student) {
 
-        this.vragen.add(new Vraag("Is een jaar 12 maanden?", "Ja"));
-        this.vragen.add(new Vraag("Bestaat de kerstman?", "Ja"));
-        this.vragen.add(new Vraag("Is 1+1 2?", "Ja"));
+        this.vragen.add(new Vraag("Is een jaar 12 maanden?", "Ja", 25));
+        this.vragen.add(new Vraag("Bestaat de kerstman?", "Ja",25));
+        this.vragen.add(new Vraag("Is 1+1 2?", "Ja",25));
 
         Scanner scanner = new Scanner(System.in);
 
@@ -52,6 +56,12 @@ public class Exam {
     public void setAantalJuisteAntwoorden(Integer aantalJuisteAntwoorden) {
         this.aantalJuisteAntwoorden = aantalJuisteAntwoorden;
     }
+
+
+
+
+
+    public Exam(){this("",null);}
 
     public ArrayList<Vraag> getVragen() {
         return vragen;

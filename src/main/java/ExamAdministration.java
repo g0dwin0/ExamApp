@@ -14,6 +14,11 @@ public class ExamAdministration {
         while(!Choise.equals("x")) {
             MENU.getChoise(Choise);
             Choise = READER.nextLine();
+            if(Choise.equals("`")){
+                Menu.showMenu();
+            }
         }
+
+
     }
 }
