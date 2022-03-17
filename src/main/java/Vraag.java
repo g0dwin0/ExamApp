@@ -44,11 +44,18 @@ public class Vraag {
     public static ArrayList<Vraag> vragen() {
         ArrayList<Vraag> openvragen = new ArrayList<>();
         openvragen.add(new Vraag("Wat is 1 + 1","2",10));
+        openvragen.add(new Vraag("Wat is 1 + 3","4",10));
+        openvragen.add(new Vraag("Wat is 1 + 4","5",10));
+        openvragen.add(new Vraag("Wat is 1 + 1","2",10));
+
         return openvragen;
     }
     public static ArrayList<Vraag> McVragen(){
         ArrayList<Vraag> mcvragen = new ArrayList<>();
         mcvragen.add(new Vraag("Welk land heeft de grootste landopervlakte",optie("Amerika","Australie","China","Rusland"),"D", 2));
+        mcvragen.add(new Vraag("Welk land ",optie("Amerika","Australie","China","Rusland"),"D", 2));
+        mcvragen.add(new Vraag("Welk land  grootste landopervlakte",optie("Amerika","Australie","China","Rusland"),"D", 2));
+        mcvragen.add(new Vraag("Welk land  landopervlakte",optie("Amerika","Australie","China","Rusland"),"D", 2));
 
         return mcvragen;
     }

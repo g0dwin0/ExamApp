@@ -2,6 +2,7 @@ import java.awt.*;
 import java.lang.reflect.Array;
 import java.sql.Struct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Menu {
@@ -95,6 +96,8 @@ public class Menu {
         }
 
         ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
+        Collections.shuffle(examQuestions);
+
         for (Vraag vraag : examQuestions) {
             System.out.println(vraag.getVraag());
 
