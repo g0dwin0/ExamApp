@@ -31,8 +31,11 @@ public class Menu {
         System.out.println("[3] Register students");
         System.out.println("[4] Remove students");
         System.out.println("[5] Take exam");
-        System.out.println("[6] Option 6");
+        System.out.println("[6] Did student succeed?");
+        System.out.println("[7] Which exams did student succeed in?");
+        System.out.println("[8] Which student succeeded in most exams?");
         System.out.println("[X] Close program");
+        System.out.println("Your choice:");
     }
 
     public void getChoise(String choise) {

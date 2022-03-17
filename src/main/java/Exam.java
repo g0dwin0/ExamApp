@@ -34,11 +34,19 @@ public class Exam {
             if(vragen.indexOf(vraag) == vragen.size() - 1) {
                 if(aantalJuisteAntwoorden < minimumCorrect) {
                     System.out.println("Je hebt het examen niet gehaald.");
+                    System.out.printf("Dit is jouw cijfer: %.1f", finalCijfer(aantalJuisteAntwoorden));
+
                 } else {
                     System.out.println("Goed gedaan! Je hebt het gehaald.");
+                    System.out.printf("Dit is jouw cijfer: %.1f", finalCijfer(aantalJuisteAntwoorden));
                 }
             }
         }
+    }
+    public Double finalCijfer(Integer punten){
+        double eindCijfer = punten / 15 * 10;
+        return eindCijfer;
+
     }
 
     public String getNaam() {

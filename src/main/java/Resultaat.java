@@ -35,4 +35,6 @@ public class Resultaat {
     public void setGehaald(boolean gehaald) {
         this.gehaald = gehaald;
     }
+
+
 }
