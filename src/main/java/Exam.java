@@ -43,8 +43,8 @@ public class Exam {
             }
         }
     }
-    public Double finalCijfer(Integer punten){
-        double eindCijfer = punten / 15 * 10;
+    public Double finalCijfer(double punten){
+        double eindCijfer = punten / 15.0 * 10.0;
         return eindCijfer;
 
     }
