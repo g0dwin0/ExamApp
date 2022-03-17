@@ -82,10 +82,22 @@ public class Menu {
 
     private void takeExam() {
 
-        System.out.println(showExamList());
-        String Choise = READER.nextLine();
+        System.out.println(showStudentList());
+        Student candidate = null;
+        while (candidate == null) {
+            System.out.println("Vul jouw studentnummer in:");
+            String studentNumber = READER.nextLine();
+            candidate = findStudentWithNumber(studentNumber);
+            if (candidate == null) {
+                System.out.println("Student niet gevonden.");
+            }
+        }
 
-        switch (Choise) {
+
+        System.out.println(showExamList());
+        String Choice = READER.nextLine();
+
+        switch (Choice) {
             case "1":
                 String a = "Open Vragen";
                 isExamAvailible(a);
@@ -163,5 +175,17 @@ public class Menu {
         // TODO - ADDING REGEX
 
 
+    }
+
+    private Student findStudentWithNumber(String studentNumber) {
+        Student candidate;
+        for (int i = 0; i < STUDENTLIST.size(); i++) {
+            String student = STUDENTLIST.get(i).getStudentnummer();
+            if (Objects.equals(studentNumber, student)) {
+                candidate = STUDENTLIST.get(i);
+                return candidate;
+            }
+        }
+        return null;
     }
 }
