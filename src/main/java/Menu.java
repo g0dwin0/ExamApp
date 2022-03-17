@@ -3,7 +3,10 @@ import java.lang.reflect.Array;
 import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Menu {
 
@@ -108,7 +111,7 @@ public class Menu {
             }
             String answer = READER.nextLine();
             if (vraag.getAntwoord().equals(answer)) {
-                System.out.println("goe");
+                System.out.println("Goed");
             }
         }
     }
@@ -137,9 +140,28 @@ public class Menu {
         // TODO - ADDING REGEX
         System.out.println("Type in your student number >");
         String studentNumber = READER.nextLine().trim();
+        Pattern pattern = Pattern.compile("^[0-9]*$");
+        Matcher matcher = pattern.matcher(studentNumber);
+        if(studentNumber.length() > 8 || studentNumber.length() == 0) {
+            System.out.println("Student nummer is te lang, of te kort.");
+            return;
+        }
+        boolean matchFound = matcher.matches();
+        if(matchFound) {
+            for(Student student : STUDENTLIST) {
+                if(Objects.equals(student.getStudentnummer(), studentNumber)) {
+                    System.out.println("Nummer is niet uniek.");
+                    return;
+                }
+            }
+            Student student = new Student(studentName, studentNumber);
+            STUDENTLIST.add(student);
+        } else {
+            System.out.println("Uw invoer is geen nummer, of is langer dan 8 nummers.");
+            return;
+        }
         // TODO - ADDING REGEX
 
-        Student student = new Student(studentName, studentNumber);
-        STUDENTLIST.add(student);
+
     }
 }
