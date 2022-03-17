@@ -113,6 +113,8 @@ public class Menu {
         ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
         Collections.shuffle(examQuestions);
 
+
+        int aantalJuist = 0;
         for (Vraag vraag : examQuestions) {
             System.out.println(vraag.getVraag());
 
@@ -123,9 +125,12 @@ public class Menu {
             }
             String answer = READER.nextLine();
             if (vraag.getAntwoord().equals(answer)) {
+                aantalJuist++;
                 System.out.println("Goed");
             }
         }
+        candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist));
+
     }
 
     private String showStudentList() {

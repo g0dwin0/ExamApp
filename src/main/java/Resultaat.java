@@ -1,15 +1,13 @@
+import java.util.ArrayList;
+
 public class Resultaat {
-    private Student student;
     private Exam exam;
     private Integer aantalJuist;
-    private boolean gehaald;
+    private boolean gehaald = isGehaald();
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
+    public Resultaat(Exam exam, Integer aantalJuist) {
+        this.exam = exam;
+        this.aantalJuist = aantalJuist;
     }
 
     public Exam getExam() {
@@ -29,11 +27,15 @@ public class Resultaat {
     }
 
     public boolean isGehaald() {
-        return gehaald;
-    }
-
-    public void setGehaald(boolean gehaald) {
-        this.gehaald = gehaald;
+        boolean resultaat = false;
+        ArrayList<Vraag> vragen = this.exam.getVragen();
+        double cijfer = this.aantalJuist / vragen.size() * 10.0;
+        if ( 5.5 >= cijfer) {
+            resultaat = true;
+        } else {
+            resultaat = false;
+        }
+        return resultaat;
     }
 
 
