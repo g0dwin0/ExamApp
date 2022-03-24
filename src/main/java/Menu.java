@@ -1,6 +1,3 @@
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -82,15 +79,15 @@ public class Menu {
         }
     }
 
-    public boolean isExamAvailible(String examChoise){
-        boolean availible = false;
+    public boolean isExamAvailable(String examChoise){
+        boolean available = false;
         for(Exam exam : EXAMS){
             if(exam.getNaam().equals(examChoise)){
                 EXAMTOTAKE = exam;
-                availible = true;
+                available = true;
             }
         }
-        return availible;
+        return available;
     }
 
     private void takeExam() {
@@ -113,12 +110,12 @@ public class Menu {
         switch (Choice) {
             case "1":
                 String a = "Open Vragen";
-                isExamAvailible(a);
+                isExamAvailable(a);
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
                 break;
             case "2":
                 String b = "MC Vragen";
-                isExamAvailible(b);
+                isExamAvailable(b);
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
                 break;
         }
