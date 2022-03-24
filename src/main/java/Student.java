@@ -20,4 +20,8 @@ public class Student {
     public void setNaam(String naam) {this.studentName = naam;}
 
     public void addResult(Resultaat result) {this.studentResults.add(result);}
+
+    public Resultaat getStudentResults(){
+        return studentResults.get(studentResults.size() -1);
+    }
 }

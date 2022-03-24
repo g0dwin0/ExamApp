@@ -143,8 +143,16 @@ public class Menu {
             }
         }
         candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist));
+        if(candidate.getStudentResults().isGehaald()) {
+            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.2f", (aantalJuist / examQuestions.size() * 10.0));
+        }
+        else {
+            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.2f", (aantalJuist / examQuestions.size() * 10.0));
+        }
+        }
 
-    }
+
+
 
     private String showStudentList() {
         StringBuilder students = new StringBuilder();
