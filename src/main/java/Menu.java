@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Menu {
 
@@ -67,6 +65,21 @@ public class Menu {
     }
 
     private void removeStudents() {
+        if(STUDENTLIST.size() != 0){
+            System.out.println("Enter your student number");
+            String studentnumber = READER.nextLine();
+            System.out.println("Enter your name");
+            String studentname = READER.nextLine();
+
+            if(STUDENTLIST.removeIf(student -> student.getNaam().equals(studentname) && student.getStudentnummer().equals(studentnumber))) {
+                System.out.println("Student " + studentname + " has been removed");
+            } else {
+                System.out.println("This student does not exist");
+                removeStudents();
+            }
+        } else {
+            System.out.println("Studentlist does not contain any students");
+        }
     }
 
     public boolean isExamAvailible(String examChoise){
@@ -126,7 +139,7 @@ public class Menu {
             String answer = READER.nextLine();
             if (vraag.getAntwoord().equals(answer)) {
                 aantalJuist++;
-                System.out.println("Goed");
+                System.out.println("goed");
             }
         }
         candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist));
@@ -157,29 +170,10 @@ public class Menu {
         // TODO - ADDING REGEX
         System.out.println("Type in your student number >");
         String studentNumber = READER.nextLine().trim();
-        Pattern pattern = Pattern.compile("^[0-9]*$");
-        Matcher matcher = pattern.matcher(studentNumber);
-        if(studentNumber.length() > 8 || studentNumber.length() == 0) {
-            System.out.println("Student nummer is te lang, of te kort.");
-            return;
-        }
-        boolean matchFound = matcher.matches();
-        if(matchFound) {
-            for(Student student : STUDENTLIST) {
-                if(Objects.equals(student.getStudentnummer(), studentNumber)) {
-                    System.out.println("Nummer is niet uniek.");
-                    return;
-                }
-            }
-            Student student = new Student(studentName, studentNumber);
-            STUDENTLIST.add(student);
-        } else {
-            System.out.println("Uw invoer is geen nummer, of is langer dan 8 nummers.");
-            return;
-        }
         // TODO - ADDING REGEX
 
-
+        Student student = new Student(studentName, studentNumber);
+        STUDENTLIST.add(student);
     }
 
     private Student findStudentWithNumber(String studentNumber) {

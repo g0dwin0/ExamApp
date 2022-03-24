@@ -6,6 +6,7 @@ public class ExamAdministration {
     private final Menu MENU = new Menu();
 
     public void startProgram() {
+
         Menu.showMenu();
 
         String Choise = READER.nextLine();
