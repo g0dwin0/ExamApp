@@ -140,11 +140,13 @@ public class Menu {
             }
         }
         candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist));
+        double aantalJuist2 = aantalJuist;
+        double vragenSize = examQuestions.size();
         if(candidate.getStudentResults().isGehaald()) {
-            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.2f", (aantalJuist / examQuestions.size() * 10.0));
+            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
         }
         else {
-            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.2f", (aantalJuist / examQuestions.size() * 10.0));
+            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
         }
         }
 
