@@ -86,15 +86,12 @@ public class Menu {
         }
     }
 
-    public boolean isExamAvailable(String examChoise){
-        boolean available = false;
+    public void isExamAvailable(String examChoise){
         for(Exam exam : EXAMS){
             if(exam.getNaam().equals(examChoise)){
                 EXAMTOTAKE = exam;
-                available = true;
             }
         }
-        return available;
     }
 
     private void takeExam() {
@@ -115,16 +112,16 @@ public class Menu {
         String Choice = READER.nextLine();
 
         switch (Choice) {
-            case "1":
+            case "1" -> {
                 String a = "Open Vragen";
                 isExamAvailable(a);
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
-                break;
-            case "2":
+            }
+            case "2" -> {
                 String b = "MC Vragen";
                 isExamAvailable(b);
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
-                break;
+            }
         }
         // TODO: Replace with foreach to support unlimited exams
 
