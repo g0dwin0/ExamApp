@@ -33,6 +33,8 @@ public class Menu {
         System.out.println("[6] Did student succeed?");
         System.out.println("[7] Which exams did student succeed in?");
         System.out.println("[8] Which student succeeded in most exams?");
+        System.out.println("[9] Add exam");
+
         System.out.println("[X] Close program");
         System.out.println("Your choice:");
     }
@@ -54,10 +56,15 @@ public class Menu {
             case "5":
                 takeExam();
                 break;
+            case "9":
+                Exam.addExam();
+                showMenu();
+                break;
             case "`":
                 break;
             default:
-                System.out.println(" is not a valid option choose again");
+                System.out.println(" is not a valid option choose again\n");
+                showMenu();
         }
     }
 
@@ -119,6 +126,7 @@ public class Menu {
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
                 break;
         }
+        // TODO: Replace with foreach to support unlimited exams
 
         ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
         Collections.shuffle(examQuestions);
