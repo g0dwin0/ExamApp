@@ -1,4 +1,5 @@
 import junit.framework.TestCase;
+import org.junit.Assert;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -12,9 +13,12 @@ public class ExamTest extends TestCase {
     }
 
     public void testGetNaam() {
+        Exam exam = new Exam("Security",null);
+        Assert.assertEquals("Security",exam.getNaam());
     }
 
     public void testAddExam() {
+
     }
 
     public void testSetNaam() {

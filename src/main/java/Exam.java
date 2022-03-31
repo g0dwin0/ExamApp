@@ -14,7 +14,7 @@ public class Exam {
         this.vragen = vragen;
     }
 
-    public void startExam(Student student) {
+/*    public void startExam(Student student) {
 
         this.vragen.add(new Vraag("Is een jaar 12 maanden?", "Ja", 25));
         this.vragen.add(new Vraag("Bestaat de kerstman?", "Ja", 25));
@@ -43,7 +43,7 @@ public class Exam {
                 }
             }
         }
-    }
+    }*/
 
     public Double finalCijfer(double punten) {
         double eindCijfer = punten / 15.0 * 10.0;
