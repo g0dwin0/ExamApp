@@ -39,6 +39,10 @@ public class Menu {
         System.out.println("Your choice:");
     }
 
+    /***
+     * Selection buttons for showMenu, proceeds with selected option
+     * @param choise
+     */
     public void getChoise(String choise) {
         switch (choise) {
             case "1":
@@ -115,6 +119,9 @@ public class Menu {
         }
     }
 
+    /***
+     * If exam candidate is registered show the list of exams
+     */
     private void takeExam() {
 
         System.out.println(showStudentList());
@@ -229,6 +236,11 @@ public class Menu {
         //TODO : Add REGEX to prevent number in the student name
     }
 
+    /***
+     *
+     * @param studentNumber
+     * @return
+     */
     private Student findStudentWithNumber(String studentNumber) {
         Student candidate;
         for (Student value : STUDENTLIST) {

@@ -11,6 +11,7 @@ public class Student {
     public Student(String studentName, String studentNumber) {
         this.studentName = studentName;
         this.studentNumber = studentNumber;
+
     }
 
     public String getNaam() {return studentName;}

@@ -1,5 +1,8 @@
 import junit.framework.TestCase;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class ExamTest extends TestCase {
 
     public void testStartExam() {
