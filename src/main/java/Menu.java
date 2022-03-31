@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class Menu {
 
     private final Scanner READER = new Scanner(System.in);
-    private ArrayList<Student> STUDENTLIST = new ArrayList<>();
+    private final ArrayList<Student> STUDENTLIST = new ArrayList<>();
     private final ExamList EXAMLIST = new ExamList();
     private final ArrayList<Exam> EXAMS = EXAMLIST.getExamList();
 
-    private ExamAttempt EXAMATTEMPT = new ExamAttempt(false);
+    private final ExamAttempt EXAMATTEMPT = new ExamAttempt(false);
     private Exam EXAMTOTAKE = new Exam();
 
 
@@ -56,6 +56,11 @@ public class Menu {
             case "5":
                 takeExam();
                 break;
+            case "7":
+                passedStudents();
+                break;
+            case "8":
+                bestStudent();
             case "9":
                 Exam.addExam();
                 showMenu();
@@ -67,6 +72,19 @@ public class Menu {
                 showMenu();
         }
     }
+
+    /***
+     * Checks for student(s) with the most exams passed
+     */
+    private void bestStudent() {
+    }
+
+    private void passedStudents() {
+    }
+
+    /***
+     * Removes students from the student list if given name and student number are equal to information in the list
+     */
 
     private void removeStudents() {
         if(STUDENTLIST.size() != 0){
@@ -86,6 +104,9 @@ public class Menu {
         }
     }
 
+    /***
+     * Checks if in menu selected exam is available for exam attempt
+     */
     public void isExamAvailable(String examChoise){
         for(Exam exam : EXAMS){
             if(exam.getNaam().equals(examChoise)){
@@ -111,6 +132,15 @@ public class Menu {
         System.out.println(showExamList());
         String Choice = READER.nextLine();
 
+ /*       for (Exam exam : EXAMS) {
+            if (showExamList().equals(Choice)) {
+                String a = exam.getNaam();
+                isExamAvailable(a);
+                EXAMATTEMPT.setExam(EXAMTOTAKE);
+            }
+
+        }*/
+
         switch (Choice) {
             case "1" -> {
                 String a = "Open Vragen";
@@ -123,6 +153,8 @@ public class Menu {
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
             }
         }
+
+
         // TODO: Replace with foreach to support unlimited exams
 
         ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
@@ -157,7 +189,9 @@ public class Menu {
 
 
 
-
+    /***
+     * Goes through each student in the student list and inserts them into the terminal with an ascending number
+     */
     private String showStudentList() {
         StringBuilder students = new StringBuilder();
         for(int i = 0; i < STUDENTLIST.size(); i ++) {
@@ -165,7 +199,9 @@ public class Menu {
         }
         return students.toString();
     }
-
+    /***
+     * Goes through each exam in the exam list and inserts them into the terminal with an ascending number
+     */
     private String showExamList() {
         StringBuilder exams = new StringBuilder();
         int i = 0;
@@ -176,24 +212,29 @@ public class Menu {
         return exams.toString();
     }
 
+    /***
+     * Registers new students with their full name and student number into the exam program
+     */
+
     private void studentRegister() {
         System.out.println("Type in your name >");
         String studentName = READER.nextLine().trim();
-        // TODO - ADDING REGEX
         System.out.println("Type in your student number >");
         String studentNumber = READER.nextLine().trim();
-        // TODO - ADDING REGEX
 
         Student student = new Student(studentName, studentNumber);
         STUDENTLIST.add(student);
+
+        //TODO : Add REGEX to prevent letters in the student number
+        //TODO : Add REGEX to prevent number in the student name
     }
 
     private Student findStudentWithNumber(String studentNumber) {
         Student candidate;
-        for (int i = 0; i < STUDENTLIST.size(); i++) {
-            String student = STUDENTLIST.get(i).getStudentnummer();
+        for (Student value : STUDENTLIST) {
+            String student = value.getStudentnummer();
             if (Objects.equals(studentNumber, student)) {
-                candidate = STUDENTLIST.get(i);
+                candidate = value;
                 return candidate;
             }
         }

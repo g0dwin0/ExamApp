@@ -10,4 +10,5 @@ public class ExamList {
         ExamList.add(new Exam("MC Vragen",Vraag.McVragen()));    }
 
     public ArrayList<Exam> getExamList(){return ExamList;}
+
 }
