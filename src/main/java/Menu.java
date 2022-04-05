@@ -13,6 +13,8 @@ public class Menu {
     private final ExamAttempt EXAMATTEMPT = new ExamAttempt(false);
     private Exam EXAMTOTAKE = new Exam();
 
+    private StringChecker stringChecker = new StringChecker();
+
 
     public static void showMenu() {
         System.out.println("");
@@ -224,22 +226,35 @@ public class Menu {
      */
 
     private void studentRegister() {
-        System.out.println("Type in your name >");
-        String studentName = READER.nextLine().trim();
-        System.out.println("Type in your student number >");
-        String studentNumber = READER.nextLine().trim();
+        String studentName = "";
+        while (studentName == "") {
+            System.out.println("Type in your name >");
+            String scanName = READER.nextLine().trim();
+            if (stringChecker.isFullName(scanName)) {
+                studentName = scanName;
+            } else {
+                System.out.println("\033[0;31m" + "Please enter a valid full name!" + "\033[0m");
+            }
+        }
+
+        String studentNumber = "";
+        while (studentNumber == "") {
+            System.out.println("Type in your student number >");
+            String scanNumber = READER.nextLine().trim();
+            if (stringChecker.isStudentNumber(scanNumber)) {
+                studentNumber = scanNumber;
+            } else {
+                System.out.println("\033[0;31m" + "Please enter a valid student number!" + "\033[0m");
+            }
+        }
 
         try {
             Student student = new Student(studentName, studentNumber);
             STUDENTLIST.add(student);
-            System.out.println("You successfully registered a student!");
+            System.out.println("\033[0;32m" + "You successfully registered a student!" + "\033[0m");
         } catch (Exception e) {
-            System.out.println("Something went wrong. Try again!");
+            System.out.println("\033[0;31m" + "Something went wrong. Try again!" + "\033[0m");
         }
-
-
-        //TODO : Add REGEX to prevent letters in the student number
-        //TODO : Add REGEX to prevent number in the student name
     }
 
     /***
