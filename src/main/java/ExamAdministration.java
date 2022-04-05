@@ -7,15 +7,24 @@ public class ExamAdministration {
 
     public void startProgram() {
 
+        System.out.println("""
+
+                ███████╗██╗░░██╗░█████╗░███╗░░░███╗  ██████╗░░█████╗░███╗░░██╗███████╗██╗░░░░░  ███████╗░█████╗░
+                ██╔════╝╚██╗██╔╝██╔══██╗████╗░████║  ██╔══██╗██╔══██╗████╗░██║██╔════╝██║░░░░░  ╚════██║██╔══██╗
+                █████╗░░░╚███╔╝░███████║██╔████╔██║  ██████╔╝███████║██╔██╗██║█████╗░░██║░░░░░  ░░░░██╔╝███████║
+                ██╔══╝░░░██╔██╗░██╔══██║██║╚██╔╝██║  ██╔═══╝░██╔══██║██║╚████║██╔══╝░░██║░░░░░  ░░░██╔╝░██╔══██║
+                ███████╗██╔╝╚██╗██║░░██║██║░╚═╝░██║  ██║░░░░░██║░░██║██║░╚███║███████╗███████╗  ░░██╔╝░░██║░░██║
+                ╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝  ╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝╚══════╝  ░░╚═╝░░░╚═╝░░╚═╝""");
+
         Menu.showMenu();
 
-        String Choise = READER.nextLine();
+        String Choice = "";
         //System.out.println("Enter your menu choise");
 
-        while(!Choise.equals("x")) {
-            MENU.getChoise(Choise);
-            Choise = READER.nextLine();
-            if(Choise.equals("`")){
+        while(!Choice.equals("x")) {
+            Choice = READER.nextLine();
+            MENU.getChoise(Choice);
+            if(!Choice.equals("x")){
                 Menu.showMenu();
             }
         }

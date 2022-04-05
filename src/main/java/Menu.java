@@ -15,16 +15,7 @@ public class Menu {
 
 
     public static void showMenu() {
-
-        System.out.println("""
-
-                ███████╗██╗░░██╗░█████╗░███╗░░░███╗  ██████╗░░█████╗░███╗░░██╗███████╗██╗░░░░░  ███████╗░█████╗░
-                ██╔════╝╚██╗██╔╝██╔══██╗████╗░████║  ██╔══██╗██╔══██╗████╗░██║██╔════╝██║░░░░░  ╚════██║██╔══██╗
-                █████╗░░░╚███╔╝░███████║██╔████╔██║  ██████╔╝███████║██╔██╗██║█████╗░░██║░░░░░  ░░░░██╔╝███████║
-                ██╔══╝░░░██╔██╗░██╔══██║██║╚██╔╝██║  ██╔═══╝░██╔══██║██║╚████║██╔══╝░░██║░░░░░  ░░░██╔╝░██╔══██║
-                ███████╗██╔╝╚██╗██║░░██║██║░╚═╝░██║  ██║░░░░░██║░░██║██║░╚███║███████╗███████╗  ░░██╔╝░░██║░░██║
-                ╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝  ╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝╚══════╝  ░░╚═╝░░░╚═╝░░╚═╝""");
-
+        System.out.println("");
         System.out.println("[1] Exam list");
         System.out.println("[2] Student list");
         System.out.println("[3] Register students");
@@ -104,7 +95,7 @@ public class Menu {
                 removeStudents();
             }
         } else {
-            System.out.println("Studentlist does not contain any students");
+            System.out.println("No registered students found...");
         }
     }
 
@@ -201,8 +192,13 @@ public class Menu {
      */
     private String showStudentList() {
         StringBuilder students = new StringBuilder();
-        for(int i = 0; i < STUDENTLIST.size(); i ++) {
-            students.append("\n[").append(i + 1).append("]").append(" ").append(STUDENTLIST.get(i).getNaam()).append(" ").append(STUDENTLIST.get(i).getStudentnummer());
+        students.append("Registered students: \n");
+        if (STUDENTLIST.size() == 0) {
+            students.append("No registered students found...");
+        } else {
+            for(int i = 0; i < STUDENTLIST.size(); i++) {
+                students.append("\n[").append(i + 1).append("]").append(" ").append(STUDENTLIST.get(i).getNaam()).append(" ").append(STUDENTLIST.get(i).getStudentnummer());
+            }
         }
         return students.toString();
     }
@@ -211,10 +207,14 @@ public class Menu {
      */
     private String showExamList() {
         StringBuilder exams = new StringBuilder();
+        exams.append("Available exams include: \n");
         int i = 0;
         for (Exam exam : EXAMS){
-            exams.append("[").append(i + 1).append("] ").append(exam.getNaam()).append("\n");
-            i++;
+            if (i++ == EXAMS.size() - 1) {
+                exams.append("[").append(i).append("] ").append(exam.getNaam());
+            } else {
+                exams.append("[").append(i).append("] ").append(exam.getNaam()).append("\n");
+            }
         }
         return exams.toString();
     }
@@ -229,8 +229,14 @@ public class Menu {
         System.out.println("Type in your student number >");
         String studentNumber = READER.nextLine().trim();
 
-        Student student = new Student(studentName, studentNumber);
-        STUDENTLIST.add(student);
+        try {
+            Student student = new Student(studentName, studentNumber);
+            STUDENTLIST.add(student);
+            System.out.println("You successfully registered a student!");
+        } catch (Exception e) {
+            System.out.println("Something went wrong. Try again!");
+        }
+
 
         //TODO : Add REGEX to prevent letters in the student number
         //TODO : Add REGEX to prevent number in the student name
