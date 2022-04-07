@@ -1,6 +1,8 @@
 import junit.framework.TestCase;
 import org.junit.Assert;
 
+import java.util.ArrayList;
+
 public class VraagTest extends TestCase {
 
     public void testGetVraag() {
@@ -30,8 +32,7 @@ public class VraagTest extends TestCase {
     public void testVragen() {
     }
 
-    public void testMcVragen() {
-    }
+
 
     public void testOptie() {
     }
