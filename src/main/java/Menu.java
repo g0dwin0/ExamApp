@@ -158,7 +158,7 @@ public class Menu {
                 System.out.println("Vul jouw studentnummer in:");
                 String studentNumber = READER.nextLine();
                 candidate = findStudentWithNumber(studentNumber);
-                selectExam();
+                selectExam(candidate);
                 if (candidate == null) {
                     System.out.println("Student niet gevonden.");
                 }
@@ -170,7 +170,7 @@ public class Menu {
 
     }
 
-    private void selectExam(){
+    private void selectExam(Student candidate){
             System.out.println(showExamList());
 
             int number = 0;
@@ -184,13 +184,12 @@ public class Menu {
             isExamAvailable(number);
             EXAMATTEMPT.setExam(EXAMTOTAKE);
             System.out.println(EXAMTOTAKE.getName());
-            takeExam();
+            takeExam(candidate);
     }
-    private void takeExam() {
+    private void takeExam(Student candidate) {
 
             ArrayList<Question> examQuestions = EXAMTOTAKE.getQuestions();
             Collections.shuffle(examQuestions);
-
 
             int amountCorrect = 0;
             for (Question question : examQuestions) {
@@ -207,16 +206,18 @@ public class Menu {
                     System.out.println("Goed!");
                 }
             }
-            candidate.addResult(new Result(EXAMTOTAKE, amountCorrect, hasPassed(EXAMTOTAKE, amountCorrect)));
-            double amountCorrect1 = amountCorrect;
-            double questionSize = examQuestions.size();
-            if (candidate.getStudentResults().passed) {
-                System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", (amountCorrect1 / questionSize * 10.0));
-            } else {
-                System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (amountCorrect1 / questionSize * 10.0));
-            }
-        }
+            addCandidateResult(amountCorrect,examQuestions, candidate);
 
+        }
+    public void addCandidateResult(int amountCorrect, ArrayList<Question> examQuestions, Student candidate){
+        candidate.addResult(new Result(EXAMTOTAKE, amountCorrect, hasPassed(EXAMTOTAKE, amountCorrect)));
+        double questionSize = examQuestions.size();
+        if (candidate.getStudentResults().passed) {
+            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", ((double)amountCorrect / questionSize * 10.0));
+        } else {
+            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", ((double) amountCorrect / questionSize * 10.0));
+        }
+    }
 
 
     /***
