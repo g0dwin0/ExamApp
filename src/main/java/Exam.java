@@ -8,6 +8,8 @@ public class Exam {
     private ArrayList<Question> questions;
     private ArrayList<Result> results;
     private Integer minimumCorrect;
+    private static final Scanner READERs = new Scanner(System.in);
+
 
     public Exam(String name, ArrayList<Question> questions) {
         this.name = name;
@@ -25,7 +27,11 @@ public class Exam {
         return name;
     }
 
-    public static void addExam() {
+
+/*
+
+
+    public static void addExam1() {
         Exam exam = new Exam();
         Scanner scanner = new Scanner(System.in);
 
@@ -136,6 +142,7 @@ public class Exam {
             System.out.println("Ongeldige naam");
         }
     }
+*/
 
     public void setName(String name) {
         this.name = name;

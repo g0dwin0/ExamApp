@@ -23,9 +23,9 @@ public class ExamPanel {
         while(!Choice.equals("x")) {
             Choice = READER.nextLine();
             MENU.getChoise(Choice);
-            if(!Choice.equals("x")){
-                Menu.showMenu();
-            }
+//            if(!Choice.equals("x")){
+//                Menu.showMenu();
+//            }
         }
 
 

@@ -1,37 +1,52 @@
-import junit.framework.TestCase;
-import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class QuestionTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
 
-    public void testGetVraag() {
-        Question question = new Question("Wat is 1 + 1","2",10);
-        Assert.assertEquals("Wat is 1 + 1", question.getQuestion());
+class QuestionTest {
+
+    @BeforeEach
+    void setUp() {
     }
 
-    public void testSetVraag() {
+    @AfterEach
+    void tearDown() {
     }
 
-    public void testGetAntwoord() {
-        Question question = new Question("Wat is 1 + 1","2",10);
-        Assert.assertEquals("2", question.getAnswer());
+    @Test
+    void getQuestion() {
     }
 
-    public void testSetAntwoord() {
+    @Test
+    void setQuestion() {
     }
 
-    public void testGetPunten() {
-        Question question = new Question("Wat is 1 + 1","2",10);
-        Assert.assertEquals(10, question.getPoints());
+    @Test
+    void getAnswer() {
     }
 
-    public void testGetKeuze() {
+    @Test
+    void setAnswer() {
     }
 
-    public void testVragen() {
+    @Test
+    void getPoints() {
     }
 
+    @Test
+    void getChoice() {
+    }
 
+    @Test
+    void openQuestion() {
+    }
 
-    public void testOptie() {
+    @Test
+    void multipleChoiceQuestion() {
+    }
+
+    @Test
+    void questionOptions() {
     }
 }
