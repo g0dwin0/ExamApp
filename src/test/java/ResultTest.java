@@ -1,6 +1,6 @@
 import junit.framework.TestCase;
 
-public class ResultaatTest extends TestCase {
+public class ResultTest extends TestCase {
 
     public void testGetExam() {
     }

@@ -4,7 +4,7 @@ public class Student {
 
     private String studentName;
     private String studentNumber;
-    public ArrayList<Resultaat> studentResults = new ArrayList<>();
+    public ArrayList<Result> studentResults = new ArrayList<>();
 
 
 
@@ -18,11 +18,11 @@ public class Student {
 
     public String getStudentnummer() {return  studentNumber;}
 
-    public void setNaam(String naam) {this.studentName = naam;}
+    public void setNaam(String name) {this.studentName = name;}
 
-    public void addResult(Resultaat result) {this.studentResults.add(result);}
+    public void addResult(Result result) {this.studentResults.add(result);}
 
-    public Resultaat getStudentResults(){
+    public Result getStudentResults(){
         return studentResults.get(studentResults.size() - 1);
     }
 }

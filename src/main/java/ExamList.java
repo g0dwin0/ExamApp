@@ -6,8 +6,8 @@ public class ExamList {
 
 
     public ExamList(){
-        ExamList.add(new Exam("Open Vragen", Vraag.vragen()));
-        ExamList.add(new Exam("Meerkeuze Vragen",Vraag.McVragen()));    }
+        ExamList.add(new Exam("Open Vragen", Question.openQuestion()));
+        ExamList.add(new Exam("Meerkeuze Vragen", Question.MultipleChoiceQuestion()));    }
 
     public ArrayList<Exam> getExamList(){return ExamList;}
 

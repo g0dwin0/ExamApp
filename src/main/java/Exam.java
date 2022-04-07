@@ -3,26 +3,26 @@ import java.util.Scanner;
 
 
 public class Exam {
-    private String naam;
-    private Integer aantalJuisteAntwoorden = 0;
-    private ArrayList<Vraag> vragen;
-    private ArrayList<Resultaat> resultaten;
+    private String name;
+    private Integer amountOfCorrectAnswers = 0;
+    private ArrayList<Question> questions;
+    private ArrayList<Result> results;
     private Integer minimumCorrect;
 
-    public Exam(String naam, ArrayList<Vraag> vragen) {
-        this.naam = naam;
-        this.vragen = vragen;
+    public Exam(String name, ArrayList<Question> questions) {
+        this.name = name;
+        this.questions = questions;
     }
 
 
-    public Double finalCijfer(double punten) {
+    public Double finalGrade(double punten) {
         double eindCijfer = punten / 15.0 * 10.0;
         return eindCijfer;
 
     }
 
-    public String getNaam() {
-        return naam;
+    public String getName() {
+        return name;
     }
 
     public static void addExam() {
@@ -32,7 +32,7 @@ public class Exam {
         System.out.println("Wat is de naam van het examen?");
         String examName = scanner.nextLine();
         if (!examName.isEmpty()) {
-            ArrayList<Vraag> questions = new ArrayList<>();
+            ArrayList<Question> questions = new ArrayList<>();
             while (true) {
                 System.out.println("Wat voor type vraag wil je toevoegen?");
                 System.out.println("[M]ultiple Choice of [O]pen vragen? of het menu [v]erlaten?");
@@ -47,13 +47,13 @@ public class Exam {
                         break;
                     case "v":
                         if(!questions.isEmpty()) {
-                            exam.setNaam(examName);
-                            exam.setVragen(questions);
+                            exam.setName(examName);
+                            exam.setQuestions(questions);
                             ExamList.ExamList.add(exam);
                             System.out.println("All exams: ");
                             for (Exam exam1 :
                                     ExamList.ExamList) {
-                                System.out.println(exam1.getNaam());
+                                System.out.println(exam1.getName());
                             }
                         }
                         return;
@@ -99,24 +99,24 @@ public class Exam {
 
                     switch (answer) {
                         case "A":
-                            Vraag a = new Vraag(question, Vraag.optie(A, B, C, D), "A", points);
+                            Question a = new Question(question, Question.questionOptions(A, B, C, D), "A", points);
                             questions.add(a);
-                            System.out.println("Vraag toegevoegd.");
+                            System.out.println("Question toegevoegd.");
                             break;
                         case "B":
-                            Vraag b = new Vraag(question, Vraag.optie(A, B, C, D), "B", points);
+                            Question b = new Question(question, Question.questionOptions(A, B, C, D), "B", points);
                             questions.add(b);
-                            System.out.println("Vraag toegevoegd.");
+                            System.out.println("Question toegevoegd.");
                             break;
                         case "C":
-                            Vraag c = new Vraag(question, Vraag.optie(A, B, C, D), "C", points);
+                            Question c = new Question(question, Question.questionOptions(A, B, C, D), "C", points);
                             questions.add(c);
-                            System.out.println("Vraag toegevoegd.");
+                            System.out.println("Question toegevoegd.");
                             break;
                         case "D":
-                            Vraag d = new Vraag(question, Vraag.optie(A, B, C, D), "D", points);
+                            Question d = new Question(question, Question.questionOptions(A, B, C, D), "D", points);
                             questions.add(d);
-                            System.out.println("Vraag toegevoegd.");
+                            System.out.println("Question toegevoegd.");
                             break;
                         default:
                             System.out.println("Ongeldige optie meegeven.");
@@ -128,7 +128,7 @@ public class Exam {
                         System.out.println("Ongeldige invoer.");
                         break;
                     }
-                    questions.add(new Vraag(question, answer, points));
+                    questions.add(new Question(question, answer, points));
                 }
             }
 
@@ -137,16 +137,16 @@ public class Exam {
         }
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getAantalJuisteAntwoorden() {
-        return aantalJuisteAntwoorden;
+    public Integer getAmountOfCorrectAnswers() {
+        return amountOfCorrectAnswers;
     }
 
-    public void setAantalJuisteAntwoorden(Integer aantalJuisteAntwoorden) {
-        this.aantalJuisteAntwoorden = aantalJuisteAntwoorden;
+    public void setAmountOfCorrectAnswers(Integer amountOfCorrectAnswers) {
+        this.amountOfCorrectAnswers = amountOfCorrectAnswers;
     }
 
 
@@ -154,20 +154,20 @@ public class Exam {
         this("", null);
     }
 
-    public ArrayList<Vraag> getVragen() {
-        return vragen;
+    public ArrayList<Question> getQuestions() {
+        return questions;
     }
 
-    public void setVragen(ArrayList<Vraag> vragen) {
-        this.vragen = vragen;
+    public void setQuestions(ArrayList<Question> questions) {
+        this.questions = questions;
     }
 
-    public ArrayList<Resultaat> getResultaten() {
-        return resultaten;
+    public ArrayList<Result> getResults() {
+        return results;
     }
 
-    public void setResultaten(ArrayList<Resultaat> resultaten) {
-        this.resultaten = resultaten;
+    public void setResults(ArrayList<Result> results) {
+        this.results = results;
     }
 
 }

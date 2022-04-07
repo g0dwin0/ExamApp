@@ -13,7 +13,7 @@ public class Menu {
     private final ExamAttempt EXAMATTEMPT = new ExamAttempt(false);
     private Exam EXAMTOTAKE = new Exam();
 
-    private StringChecker stringChecker = new StringChecker();
+    private final StringChecker stringChecker = new StringChecker();
 
 
     public static void showMenu() {
@@ -127,7 +127,7 @@ public class Menu {
             }
             int choice = READER.nextInt();
 
-            System.out.println(student.getStudentResults().gehaald);
+            System.out.println(student.getStudentResults().passed);
         }
     }
 
@@ -175,37 +175,37 @@ public class Menu {
 
             isExamAvailable(number);
             EXAMATTEMPT.setExam(EXAMTOTAKE);
-            System.out.println(EXAMTOTAKE.getNaam());
+            System.out.println(EXAMTOTAKE.getName());
 
 
             // TODO: Replace with foreach to support unlimited exams
 
-            ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
+            ArrayList<Question> examQuestions = EXAMTOTAKE.getQuestions();
             Collections.shuffle(examQuestions);
 
 
-            int aantalJuist = 0;
-            for (Vraag vraag : examQuestions) {
-                System.out.println(vraag.getVraag());
+            int amountCorrect = 0;
+            for (Question question : examQuestions) {
+                System.out.println(question.getQuestion());
 
-                if (vraag.getKeuze() != null) {
-                    for (String choise : vraag.getKeuze()) {
+                if (question.getChoice() != null) {
+                    for (String choise : question.getChoice()) {
                         System.out.println(choise);
                     }
                 }
                 String answer = READER.nextLine();
-                if (vraag.getAntwoord().equals(answer)) {
-                    aantalJuist++;
+                if (question.getAnswer().equals(answer)) {
+                    amountCorrect++;
                     System.out.println("Goed!");
                 }
             }
-            candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist, isGehaald(EXAMTOTAKE, aantalJuist)));
-            double aantalJuist2 = aantalJuist;
-            double vragenSize = examQuestions.size();
-            if (candidate.getStudentResults().gehaald) {
-                System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
+            candidate.addResult(new Result(EXAMTOTAKE, amountCorrect, hasPassed(EXAMTOTAKE, amountCorrect)));
+            double amountCorrect1 = amountCorrect;
+            double questionSize = examQuestions.size();
+            if (candidate.getStudentResults().passed) {
+                System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", (amountCorrect1 / questionSize * 10.0));
             } else {
-                System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
+                System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (amountCorrect1 / questionSize * 10.0));
             }
         } else {
             System.out.println("Registreer eerst een student om een examen te doen...");
@@ -240,9 +240,9 @@ public class Menu {
         int i = 0;
         for (Exam exam : EXAMS){
             if (i++ == EXAMS.size() - 1) {
-                exams.append("[").append(i).append("] ").append(exam.getNaam());
+                exams.append("[").append(i).append("] ").append(exam.getName());
             } else {
-                exams.append("[").append(i).append("] ").append(exam.getNaam()).append("\n");
+                exams.append("[").append(i).append("] ").append(exam.getName()).append("\n");
             }
         }
         return exams.toString();
@@ -300,15 +300,15 @@ public class Menu {
         return null;
     }
 
-    public boolean isGehaald(Exam exam, int aantalJuist) {
-        boolean resultaat = false;
-        ArrayList<Vraag> vragen = exam.getVragen();
-        double cijfer = (double) aantalJuist / vragen.size() * 10.0;
+    public boolean hasPassed(Exam exam, int amountPassed) {
+        boolean result = false;
+        ArrayList<Question> questions = exam.getQuestions();
+        double cijfer = (double) amountPassed / questions.size() * 10.0;
         if ( 5.5 <= cijfer) {
-            resultaat = true;
+            result = true;
         } else {
-            resultaat = false;
+            result = false;
         }
-        return resultaat;
+        return result;
     }
 }

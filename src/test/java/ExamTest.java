@@ -1,9 +1,6 @@
 import junit.framework.TestCase;
 import org.junit.Assert;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class ExamTest extends TestCase {
 
     public void testStartExam() {
@@ -14,7 +11,7 @@ public class ExamTest extends TestCase {
 
     public void testGetNaam() {
         Exam exam = new Exam("Security",null);
-        Assert.assertEquals("Security",exam.getNaam());
+        Assert.assertEquals("Security",exam.getName());
     }
 
     public void testAddExam() {
