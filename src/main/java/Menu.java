@@ -119,15 +119,15 @@ public class Menu {
                 }
             }
 
+            System.out.println("En van welk examen wilt u het resultaat van deze student zien?");
             System.out.println(showExamList());
-            System.out.println("En van welk examen wilt u het resultaat van deze student zien?\nKies het examen");
 
             while (!READER.hasNextInt()) {
                 READER.next();
             }
             int choice = READER.nextInt();
 
-            System.out.println(student.studentResults);
+            System.out.println(student.getStudentResults().gehaald);
         }
     }
 

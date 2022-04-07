@@ -23,6 +23,6 @@ public class Student {
     public void addResult(Resultaat result) {this.studentResults.add(result);}
 
     public Resultaat getStudentResults(){
-        return studentResults.get(studentResults.size() -1);
+        return studentResults.get(studentResults.size() - 1);
     }
 }
