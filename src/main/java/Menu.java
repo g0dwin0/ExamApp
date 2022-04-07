@@ -222,8 +222,7 @@ public class Menu {
         StringBuilder students = new StringBuilder();
         students.append("Geregistreerde studenten: \n");
         if (STUDENTLIST.size() == 0) {
-            System.out.println("Geen geregistreerde studenten gevonden...");
-            System.out.println("U word doorgestuurd naar student registratie");
+            System.out.println("Geen geregistreerde studenten gevonden...\nU word doorgestuurd naar student registratie");
             studentRegister();
         } else {
             for(int i = 0; i < STUDENTLIST.size(); i++) {
@@ -255,7 +254,9 @@ public class Menu {
 
     private void studentRegister() {
         String studentName = "";
-        while (studentName == "") {
+        String studentNumber = "";
+
+        while (studentName.equals("")) {
             System.out.println("Vul jouw volledige naam in >");
             String scanName = READER.nextLine().trim();
             if (stringChecker.isFullName(scanName)) {
@@ -264,9 +265,7 @@ public class Menu {
                 System.out.println("\033[0;31m" + "Vul een geldige naam in!" + "\033[0m");
             }
         }
-
-        String studentNumber = "";
-        while (studentNumber == "") {
+        while (studentNumber.equals("")) {
             System.out.println("Vul jouw studentnummer in >");
             String scanNumber = READER.nextLine().trim();
             if (stringChecker.isStudentNumber(scanNumber)) {
@@ -287,8 +286,7 @@ public class Menu {
 
     /***
      *
-     * @param studentNumber
-     * @return
+     * Function that looks up an exam candidate in the student list
      */
     private Student findStudentWithNumber(String studentNumber) {
         Student candidate;
