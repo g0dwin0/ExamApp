@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Resultaat {
     private Exam exam;
     private Integer aantalJuist;
-    private boolean gehaald = isGehaald();
+    public boolean gehaald = isGehaald();
 
     public Resultaat(Exam exam, Integer aantalJuist) {
         this.exam = exam;
