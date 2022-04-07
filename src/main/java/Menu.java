@@ -190,7 +190,10 @@ public class Menu {
         StringBuilder students = new StringBuilder();
         students.append("Geregistreerde studenten: \n");
         if (STUDENTLIST.size() == 0) {
-            students.append("Geen geregistreerde studenten gevonden...");
+            //students.append("Geen geregistreerde studenten gevonden...");
+            System.out.println("Geen geregistreerde studenten gevonden...");
+            System.out.println("U word doorgestuurd naar student registratie");
+            studentRegister();
         } else {
             for(int i = 0; i < STUDENTLIST.size(); i++) {
                 students.append("\n[").append(i + 1).append("]").append(" ").append(STUDENTLIST.get(i).getNaam()).append(" ").append(STUDENTLIST.get(i).getStudentnummer());
