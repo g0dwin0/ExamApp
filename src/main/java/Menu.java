@@ -305,7 +305,7 @@ public class Menu {
     public boolean isGehaald(Exam exam, int aantalJuist) {
         boolean resultaat = false;
         ArrayList<Vraag> vragen = exam.getVragen();
-        double cijfer = aantalJuist / vragen.size() * 10.0;
+        double cijfer = (double) aantalJuist / vragen.size() * 10.0;
         if ( 5.5 <= cijfer) {
             resultaat = true;
         } else {
