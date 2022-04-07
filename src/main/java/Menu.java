@@ -204,6 +204,8 @@ public class Menu {
                 if (question.getAnswer().equals(answer)) {
                     amountCorrect++;
                     System.out.println("Goed!");
+                } else{
+                    System.out.println("Fout, het juiste antwoord was " + question.getAnswer());
                 }
             }
             addCandidateResult(amountCorrect,examQuestions, candidate);
