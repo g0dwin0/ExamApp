@@ -200,11 +200,4 @@ public class Exam {
         this.resultaten = resultaten;
     }
 
-    public Integer getMinimumCorrect() {
-        return minimumCorrect;
-    }
-
-    public void setMinimumCorrect(Integer minimumCorrect) {
-        this.minimumCorrect = minimumCorrect;
-    }
 }
