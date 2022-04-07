@@ -12,7 +12,7 @@ public class Menu {
 
     private final ExamAttempt EXAMATTEMPT = new ExamAttempt(false);
     private Exam EXAMTOTAKE = new Exam();
-
+    private Student candidate;
     private final StringChecker stringChecker = new StringChecker();
 
 
@@ -51,7 +51,7 @@ public class Menu {
                 removeStudents();
                 break;
             case "5":
-                takeExam();
+                selectStudent();
                 break;
             case "6":
                 didStudentPassExam();
@@ -89,12 +89,12 @@ public class Menu {
     private void removeStudents() {
         if(STUDENTLIST.size() != 0){
             System.out.println("Vul jouw studentnummer in:");
-            String studentnumber = READER.nextLine();
+            String studentNumber = READER.nextLine();
             System.out.println("Vul jouw volledige naam in:");
-            String studentname = READER.nextLine();
+            String studentName = READER.nextLine();
 
-            if(STUDENTLIST.removeIf(student -> student.getNaam().equals(studentname) && student.getStudentnummer().equals(studentnumber))) {
-                System.out.println("Student " + studentname + " is verwijderd!");
+            if(STUDENTLIST.removeIf(student -> student.getNaam().equals(studentName) && student.getStudentnummer().equals(studentNumber))) {
+                System.out.println("Student " + studentName + " is verwijderd!");
             } else {
                 System.out.println("Deze student staat niet in het systeem.");
                 removeStudents();
@@ -138,6 +138,7 @@ public class Menu {
         try {
             Exam exam = EXAMS.get(examChoice - 1);
             EXAMTOTAKE = exam;
+            System.out.println("test");
         } catch (Exception e) {
             System.out.println("Examen niet beschikbaar!");
         }
@@ -146,8 +147,8 @@ public class Menu {
     /***
      * If exam candidate is registered show the list of exams
      */
-    private void takeExam() {
 
+    private void selectStudent() {
         System.out.println(showStudentList());
         Student candidate = null;
         if (!STUDENTLIST.isEmpty()) {
@@ -157,12 +158,19 @@ public class Menu {
                 System.out.println("Vul jouw studentnummer in:");
                 String studentNumber = READER.nextLine();
                 candidate = findStudentWithNumber(studentNumber);
+                selectExam();
                 if (candidate == null) {
                     System.out.println("Student niet gevonden.");
                 }
             }
+        } else {
+            System.out.println("Registreer eerst een student om een examen te doen...");
+            READER.nextLine();
+        }
 
+    }
 
+    private void selectExam(){
             System.out.println(showExamList());
 
             int number = 0;
@@ -176,9 +184,9 @@ public class Menu {
             isExamAvailable(number);
             EXAMATTEMPT.setExam(EXAMTOTAKE);
             System.out.println(EXAMTOTAKE.getName());
-
-
-            // TODO: Replace with foreach to support unlimited exams
+            takeExam();
+    }
+    private void takeExam() {
 
             ArrayList<Question> examQuestions = EXAMTOTAKE.getQuestions();
             Collections.shuffle(examQuestions);
@@ -207,11 +215,7 @@ public class Menu {
             } else {
                 System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (amountCorrect1 / questionSize * 10.0));
             }
-        } else {
-            System.out.println("Registreer eerst een student om een examen te doen...");
-            READER.nextLine();
         }
-    }
 
 
 
