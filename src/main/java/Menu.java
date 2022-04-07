@@ -18,18 +18,18 @@ public class Menu {
 
     public static void showMenu() {
         System.out.println("");
-        System.out.println("[1] Exam list");
-        System.out.println("[2] Student list");
-        System.out.println("[3] Register students");
-        System.out.println("[4] Remove students");
-        System.out.println("[5] Take exam");
-        System.out.println("[6] Did student succeed?");
-        System.out.println("[7] Which exams did student succeed in?");
-        System.out.println("[8] Which student succeeded in most exams?");
-        System.out.println("[9] Add exam");
+        System.out.println("[1] Examen lijst");
+        System.out.println("[2] Studenten lijst");
+        System.out.println("[3] Student registreren");
+        System.out.println("[4] Student verwijderen");
+        System.out.println("[5] Examen doen");
+        System.out.println("[6] Heeft de student het examen gehaald?");
+        System.out.println("[7] Welke examens heeft de student gehaald?");
+        System.out.println("[8] Welk student heeft de meeste examens gehaald?");
+        System.out.println("[9] Examen toevoegen");
 
-        System.out.println("[X] Close program");
-        System.out.println("Your choice:");
+        System.out.println("[X] Programma afsluiten");
+        System.out.println("Voor uw keuze in:");
     }
 
     /***
@@ -85,19 +85,19 @@ public class Menu {
 
     private void removeStudents() {
         if(STUDENTLIST.size() != 0){
-            System.out.println("Enter your student number");
+            System.out.println("Vul jouw studentnummer in:");
             String studentnumber = READER.nextLine();
-            System.out.println("Enter your name");
+            System.out.println("Vul jouw volledige naam in:");
             String studentname = READER.nextLine();
 
             if(STUDENTLIST.removeIf(student -> student.getNaam().equals(studentname) && student.getStudentnummer().equals(studentnumber))) {
-                System.out.println("Student " + studentname + " has been removed");
+                System.out.println("Student " + studentname + " is verwijderd!");
             } else {
-                System.out.println("This student does not exist");
+                System.out.println("Deze student staat niet in het systeem.");
                 removeStudents();
             }
         } else {
-            System.out.println("No registered students found...");
+            System.out.println("Geen geregistreerde studenten gevonden...");
         }
     }
 
@@ -148,7 +148,7 @@ public class Menu {
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
             }
             case "2" -> {
-                String b = "MC Vragen";
+                String b = "Meerkeuze Vragen";
                 isExamAvailable(b);
                 EXAMATTEMPT.setExam(EXAMTOTAKE);
             }
@@ -173,7 +173,7 @@ public class Menu {
             String answer = READER.nextLine();
             if (vraag.getAntwoord().equals(answer)) {
                 aantalJuist++;
-                System.out.println("goed");
+                System.out.println("Goed!");
             }
         }
         candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist));
@@ -194,9 +194,9 @@ public class Menu {
      */
     private String showStudentList() {
         StringBuilder students = new StringBuilder();
-        students.append("Registered students: \n");
+        students.append("Geregistreerde studenten: \n");
         if (STUDENTLIST.size() == 0) {
-            students.append("No registered students found...");
+            students.append("Geen geregistreerde studenten gevonden...");
         } else {
             for(int i = 0; i < STUDENTLIST.size(); i++) {
                 students.append("\n[").append(i + 1).append("]").append(" ").append(STUDENTLIST.get(i).getNaam()).append(" ").append(STUDENTLIST.get(i).getStudentnummer());
@@ -209,7 +209,7 @@ public class Menu {
      */
     private String showExamList() {
         StringBuilder exams = new StringBuilder();
-        exams.append("Available exams include: \n");
+        exams.append("Kies een examen: \n");
         int i = 0;
         for (Exam exam : EXAMS){
             if (i++ == EXAMS.size() - 1) {
@@ -228,32 +228,32 @@ public class Menu {
     private void studentRegister() {
         String studentName = "";
         while (studentName == "") {
-            System.out.println("Type in your name >");
+            System.out.println("Vul jouw volledige naam in >");
             String scanName = READER.nextLine().trim();
             if (stringChecker.isFullName(scanName)) {
                 studentName = scanName;
             } else {
-                System.out.println("\033[0;31m" + "Please enter a valid full name!" + "\033[0m");
+                System.out.println("\033[0;31m" + "Vul een geldige naam in!" + "\033[0m");
             }
         }
 
         String studentNumber = "";
         while (studentNumber == "") {
-            System.out.println("Type in your student number >");
+            System.out.println("Vul jouw studentnummer in >");
             String scanNumber = READER.nextLine().trim();
             if (stringChecker.isStudentNumber(scanNumber)) {
                 studentNumber = scanNumber;
             } else {
-                System.out.println("\033[0;31m" + "Please enter a valid student number!" + "\033[0m");
+                System.out.println("\033[0;31m" + "Vul een geldig studentnummer in!!" + "\033[0m");
             }
         }
 
         try {
             Student student = new Student(studentName, studentNumber);
             STUDENTLIST.add(student);
-            System.out.println("\033[0;32m" + "You successfully registered a student!" + "\033[0m");
+            System.out.println("\033[0;32m" + "De student is met succes geregistreerd!" + "\033[0m");
         } catch (Exception e) {
-            System.out.println("\033[0;31m" + "Something went wrong. Try again!" + "\033[0m");
+            System.out.println("\033[0;31m" + "Er ging iets fout. Probeer het opnieuw!" + "\033[0m");
         }
     }
 
