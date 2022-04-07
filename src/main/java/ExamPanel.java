@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ExamAdministration {
+public class ExamPanel {
 
     private final Scanner READER = new Scanner(System.in);
     private final Menu MENU = new Menu();
@@ -19,7 +19,6 @@ public class ExamAdministration {
         Menu.showMenu();
 
         String Choice = "";
-        //System.out.println("Enter your menu choise");
 
         while(!Choice.equals("x")) {
             Choice = READER.nextLine();

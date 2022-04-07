@@ -1,6 +1,6 @@
 import junit.framework.TestCase;
 
-public class ExamAdministrationTest extends TestCase {
+public class ExamPanelTest extends TestCase {
 
     public void testStartProgram() {
     }
