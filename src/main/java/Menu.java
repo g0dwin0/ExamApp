@@ -53,6 +53,9 @@ public class Menu {
             case "5":
                 takeExam();
                 break;
+            case "6":
+                didStudentPassExam();
+                break;
             case "7":
                 passedStudents();
                 break;
@@ -101,6 +104,33 @@ public class Menu {
         }
     }
 
+    public void didStudentPassExam() {
+        System.out.println(showStudentList());
+        Student student = null;
+        if (!STUDENTLIST.isEmpty()) {
+            System.out.println("Van welk student wilt u een resultaat zien?");
+
+            while (student == null) {
+                System.out.println("Vul zijn/haar studentnummer in:");
+                String studentNumber = READER.nextLine();
+                student = findStudentWithNumber(studentNumber);
+                if (student == null) {
+                    System.out.println("Student niet gevonden.");
+                }
+            }
+
+            System.out.println(showExamList());
+            System.out.println("En van welk examen wilt u het resultaat van deze student zien?\nKies het examen");
+
+            while (!READER.hasNextInt()) {
+                READER.next();
+            }
+            int choice = READER.nextInt();
+
+            System.out.println(student.studentResults);
+        }
+    }
+
     /***
      * Checks if in menu selected exam is available for exam attempt
      */
@@ -135,46 +165,48 @@ public class Menu {
 
             System.out.println(showExamList());
 
-            while (!READER.hasNextInt()) {
-                READER.next();
+            int number = 0;
+            String choice = READER.nextLine();
+            try {
+                number = Integer.parseInt(choice);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
             }
-            int choice = READER.nextInt();
 
-            isExamAvailable(choice);
+            isExamAvailable(number);
             EXAMATTEMPT.setExam(EXAMTOTAKE);
+            System.out.println(EXAMTOTAKE.getNaam());
 
 
+            // TODO: Replace with foreach to support unlimited exams
+
+            ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
+            Collections.shuffle(examQuestions);
 
 
-        // TODO: Replace with foreach to support unlimited exams
+            int aantalJuist = 0;
+            for (Vraag vraag : examQuestions) {
+                System.out.println(vraag.getVraag());
 
-        ArrayList<Vraag> examQuestions = EXAMTOTAKE.getVragen();
-        Collections.shuffle(examQuestions);
-
-
-        int aantalJuist = 0;
-        for (Vraag vraag : examQuestions) {
-            System.out.println(vraag.getVraag());
-
-            if (vraag.getKeuze() != null) {
-                for (String choise : vraag.getKeuze()) {
-                    System.out.println(choise);
+                if (vraag.getKeuze() != null) {
+                    for (String choise : vraag.getKeuze()) {
+                        System.out.println(choise);
+                    }
+                }
+                String answer = READER.nextLine();
+                if (vraag.getAntwoord().equals(answer)) {
+                    aantalJuist++;
+                    System.out.println("Goed!");
                 }
             }
-            String answer = READER.nextLine();
-            if (vraag.getAntwoord().equals(answer)) {
-                aantalJuist++;
-                System.out.println("Goed!");
+            candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist, isGehaald(EXAMTOTAKE, aantalJuist)));
+            double aantalJuist2 = aantalJuist;
+            double vragenSize = examQuestions.size();
+            if (candidate.getStudentResults().gehaald) {
+                System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
+            } else {
+                System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
             }
-        }
-        candidate.addResult(new Resultaat(EXAMTOTAKE, aantalJuist));
-        double aantalJuist2 = aantalJuist;
-        double vragenSize = examQuestions.size();
-        if (candidate.getStudentResults().isGehaald()) {
-            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
-        } else {
-            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
-        }
         } else {
             System.out.println("Registreer eerst een student om een examen te doen...");
             READER.nextLine();
@@ -190,7 +222,6 @@ public class Menu {
         StringBuilder students = new StringBuilder();
         students.append("Geregistreerde studenten: \n");
         if (STUDENTLIST.size() == 0) {
-            //students.append("Geen geregistreerde studenten gevonden...");
             System.out.println("Geen geregistreerde studenten gevonden...");
             System.out.println("U word doorgestuurd naar student registratie");
             studentRegister();
@@ -269,5 +300,17 @@ public class Menu {
             }
         }
         return null;
+    }
+
+    public boolean isGehaald(Exam exam, int aantalJuist) {
+        boolean resultaat = false;
+        ArrayList<Vraag> vragen = exam.getVragen();
+        double cijfer = aantalJuist / vragen.size() * 10.0;
+        if ( 5.5 <= cijfer) {
+            resultaat = true;
+        } else {
+            resultaat = false;
+        }
+        return resultaat;
     }
 }

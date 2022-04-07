@@ -4,7 +4,7 @@ public class Student {
 
     private String studentName;
     private String studentNumber;
-    private ArrayList<Resultaat> studentResults = new ArrayList<>();
+    public ArrayList<Resultaat> studentResults = new ArrayList<>();
 
 
 
