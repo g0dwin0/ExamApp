@@ -188,8 +188,8 @@ public class Menu {
                 System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", (aantalJuist2 / vragenSize * 10.0));
             }
         } else {
-            System.out.println("Registreer eerst een student om een examen te doen... (Vul iets in om verder te gaan)");
-            READER.next();
+            System.out.println("Registreer eerst een student om een examen te doen...");
+            READER.nextLine();
         }
     }
 
