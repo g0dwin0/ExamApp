@@ -44,7 +44,7 @@ public class Menu {
                 didStudentPassExam();
                 break;
             case "7":
-                passedStudents();
+                passedExams();
                 break;
             case "8":
                 bestStudent();
@@ -124,7 +124,33 @@ public class Menu {
     private void bestStudent() {
     }
 
-    private void passedStudents() {
+    private void passedExams() {
+        System.out.println(showStudentList());
+        Student student = null;
+        if (!STUDENTLIST.isEmpty()) {
+            System.out.println("Van welk student wilt u de resultaten zien?");
+
+            while (student == null) {
+                System.out.println("Vul zijn/haar studentnummer in:");
+                String studentNumber = READER.nextLine();
+                student = findStudentWithNumber(studentNumber);
+                if (student == null) {
+                    System.out.println("Student niet gevonden.");
+                }
+            }
+
+            if (!student.getStudentResultsList().isEmpty()) {
+                System.out.println("Dit zijn de resultaten van " + student.getNaam());
+                for (int i = 0; i < student.getStudentResultsList().size(); i++) {
+                    System.out.print(student.getStudentResultsList().get(i).getExam().getName() + " | ");
+                    if (student.getStudentResultsList().get(i).passed) {
+                        System.out.print("\033[0;32m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
+                    } else {
+                        System.out.print("\033[0;31m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
+                    }
+                }
+            }
+        }
     }
 
     /***
