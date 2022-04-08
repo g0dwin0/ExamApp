@@ -22,4 +22,8 @@ public class StudentTest extends TestCase {
 
     public void testGetStudentResults() {
     }
+
+    public void testGetAmountSuccesses() {
+
+    }
 }
