@@ -48,6 +48,7 @@ public class Menu {
                 break;
             case "8":
                 bestStudent();
+                break;
             case "9":
                 addExam();
                 break;
@@ -122,6 +123,35 @@ public class Menu {
      * Checks for student(s) with the most exams passed
      */
     private void bestStudent() {
+        ArrayList<Student> bestStudents = new ArrayList<>();
+        Student bestStudent = null;
+        for (Student student : STUDENTLIST) {
+            if (bestStudent == null) {
+                bestStudent = student;
+            } else {
+                if (bestStudent.getAmountSuccesses() < student.getAmountSuccesses()) {
+                    bestStudent = student;
+                }
+            }
+        }
+        assert bestStudent != null;
+
+        int highestNumberOfSuccesses = bestStudent.getAmountSuccesses();
+        for (Student student : STUDENTLIST) {
+            if (student.getAmountSuccesses() == highestNumberOfSuccesses) {
+                System.out.println(student.getNaam());
+                bestStudents.add(student);
+            }
+        }
+        if (bestStudents.size() == 1) {
+            System.out.println("Deze student heeft de meest behaalde examens: " + bestStudent.getNaam() + "\n" +
+                    "Deze student heeft " + bestStudent.getAmountSuccesses() + " examens gehaald!");
+        } else {
+            System.out.println("Dit zijn de studenten met de meest behaalde examens:");
+            for (Student student : bestStudents) { System.out.println(student.getNaam()); }
+            System.out.println("Zij hebben ieder " + bestStudent.getAmountSuccesses() + " examens gehaald!");
+        }
+
     }
 
     private void passedExams() {

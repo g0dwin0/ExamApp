@@ -27,4 +27,14 @@ public class Student {
     }
 
     public ArrayList<Result> getStudentResultsList() { return  this.studentResults; }
+
+    public int getAmountSuccesses() {
+        int amountSuccess = 0;
+        for (int i = 0; i < studentResults.size(); i++) {
+            if (studentResults.get(i).passed) {
+                amountSuccess++;
+            }
+        }
+        return amountSuccess;
+    }
 }
