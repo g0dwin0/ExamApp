@@ -1,19 +1,23 @@
+package examapp;
+
 import java.util.*;
 
 import static java.lang.System.*;
 
 public class Menu {
 
-    private final Scanner READER = new Scanner(in);
-    private final ArrayList<Student> STUDENTLIST = new ArrayList<>();
-    private final ExamList EXAMLIST = new ExamList();
-    private final ArrayList<Exam> EXAMS = EXAMLIST.getExamList();
+    private final Scanner reader = new Scanner(in);
+    private final ArrayList<Student> studentArrayList = new ArrayList<>();
+    private final ExamList examList = new ExamList();
+    private final ArrayList<Exam> examArrayList = examList.getExamList();
 
-    private final ExamAttempt EXAMATTEMPT = new ExamAttempt(false);
-    private Exam EXAMTOTAKE = new Exam();
+    private final ExamAttempt examAttempt = new ExamAttempt(false);
+    private Exam examToTake = new Exam();
     private final StringChecker stringChecker = new StringChecker();
 
-
+    /**
+     * Displays plain text list of selectable options from the menu
+     */
     public static void showMenu() {
         out.println();
         for (String s : Arrays.asList("[1] Examen lijst", "[2] Studenten lijst", "[3] Student registreren", "[4] Student verwijderen", "[5] Examen doen", "[6] Heeft de student het examen gehaald?", "[7] Welke examens heeft de student gehaald?", "[8] Welk student heeft de meeste examens gehaald?", "[9] Examen toevoegen", "[X] Programma afsluiten", "Voor uw keuze in:")) {
@@ -22,9 +26,11 @@ public class Menu {
 
     }
 
-
-     public void getChoise(String Choice) {
-        switch (Choice) {
+    /**
+     * Redirects to the selected option from showMenu
+     */
+     public void getChoise(String choice) {
+        switch (choice) {
             case "1":
                 out.println(showExamList());
                 break;
@@ -55,18 +61,21 @@ public class Menu {
             case "`":
                 break;
 
-            default: Menu.showMenu();
+            default:
         }
     }
 
+    /**
+     * Startup of adding exams by making your first choices like the name, amount of questions and the type of exam you would like to create
+     */
     public void addExam() {
         out.println("Voer de naam van het nieuwe examen in");
-        String examName = READER.nextLine();
+        String examName = reader.nextLine();
         out.println("Voer het aantal vragen die je wilt maken in");
-        int amountOfQuestions = Integer.parseInt(READER.nextLine()); // Fixes problem that happens due to next int not going to the next line
+        int amountOfQuestions = Integer.parseInt(reader.nextLine()); // Fixes problem that happens due to next int not going to the next line
             out.println("[1] Meerkeuze vragen");
             out.println("[2] Open vragen");
-            String b = READER.nextLine();
+            String b = reader.nextLine();
 
             if (b.equals("1")) {
                 addMultipleChoiceExam(examName, amountOfQuestions);
@@ -78,54 +87,67 @@ public class Menu {
 
     }
 
+    /**
+     *
+     * @param examName Takes the inserted name chosen for the exam to be implemented
+     * @param amountOfQuestions Takes the inserted question amount for the exam to be implemented
+     *  Furthermore this method will allow the user to create an open question exam.
+     */
     public void addOpenQuestionExam(String examName, int amountOfQuestions) {
         ArrayList<Question> openQuestions = new ArrayList<>();
         for(int i = 0; i <= amountOfQuestions -1 ; i ++){
             out.println("Voer vraag in");
-            String question = READER.nextLine();
+            String question = reader.nextLine();
             out.println("Voer antwoord in");
-            String answer = READER.nextLine();
+            String answer = reader.nextLine();
             out.println("Voer aantal punten in");
-            int points = Integer.parseInt(READER.nextLine()); // Fixes problem that happens due to next int not going to the next line
+            int points = Integer.parseInt(reader.nextLine()); // Fixes problem that happens due to next int not going to the next line
             openQuestions.add(new Question(question,answer,points));
         }
-        ExamList.ExamList.add(new Exam(examName,openQuestions));
+        ExamList.examArrayList.add(new Exam(examName,openQuestions));
         out.println("Exam added to list");
 
     }
 
+    /**
+     *
+     * @param examName Takes the inserted name chosen for the exam to be implemented
+     * @param amountOfQuestions Takes the inserted question amount for the exam to be implemented
+     * Furthermore this method will allow the user to create a multiple choice exam
+     */
     private  void addMultipleChoiceExam(String examName, int amountOfQuestions) {
         ArrayList<Question> multipleChoiceQuestions = new ArrayList<>();
         for(int i = 0; i <= amountOfQuestions -1 ; i ++) {
+
             out.println("Voer vraag in");
-            String question = READER.nextLine();
+            String question = reader.nextLine();
             out.println("Voer antwoord optie in");
-            String a = READER.nextLine();
+            String a = reader.nextLine();
             out.println("Voer antwoord optie in");
-            String b = READER.nextLine();
+            String b = reader.nextLine();
             out.println("Voer antwoord optie in");
-            String c = READER.nextLine();
+            String c = reader.nextLine();
             out.println("Voer antwoord optie in");
-            String d = READER.nextLine();
+            String d = reader.nextLine();
             out.println("Vul het juiste antwoord hoofdletter in");
-            String antwoord = READER.nextLine();
+            String antwoord = reader.nextLine();
             out.println("Voer aantal optie punten in");
-            int points = Integer.parseInt(READER.nextLine());// Fixes problem that happens due to next int not going to the next line
+            int points = Integer.parseInt(reader.nextLine());// Fixes problem that happens due to next int not going to the next line
 
             multipleChoiceQuestions.add(new Question(question, Question.questionOptions(a, b, c, d), antwoord, points));
         }
 
-        ExamList.ExamList.add(new Exam(examName,multipleChoiceQuestions));
+        ExamList.examArrayList.add(new Exam(examName,multipleChoiceQuestions));
         out.println("Exam added to list");
     }
 
-    /***
+    /**
      * Checks for student(s) with the most exams passed
      */
     private void bestStudent() {
         ArrayList<Student> bestStudents = new ArrayList<>();
         Student bestStudent = null;
-        for (Student student : STUDENTLIST) {
+        for (Student student : studentArrayList) {
             if (bestStudent == null) {
                 bestStudent = student;
             } else {
@@ -137,64 +159,66 @@ public class Menu {
         assert bestStudent != null;
 
         int highestNumberOfSuccesses = bestStudent.getAmountSuccesses();
-        for (Student student : STUDENTLIST) {
+        for (Student student : studentArrayList) {
             if (student.getAmountSuccesses() == highestNumberOfSuccesses) {
-                System.out.println(student.getNaam());
+                out.println(student.getNaam());
                 bestStudents.add(student);
             }
         }
         if (bestStudents.size() == 1) {
-            System.out.println("Deze student heeft de meest behaalde examens: " + bestStudent.getNaam() + "\n" +
+            out.println("Deze student heeft de meest behaalde examens: " + bestStudent.getNaam() + "\n" +
                     "Deze student heeft " + bestStudent.getAmountSuccesses() + " examens gehaald!");
         } else {
-            System.out.println("Dit zijn de studenten met de meest behaalde examens:");
-            for (Student student : bestStudents) { System.out.println(student.getNaam()); }
-            System.out.println("Zij hebben ieder " + bestStudent.getAmountSuccesses() + " examens gehaald!");
+            out.println("Dit zijn de studenten met de meest behaalde examens:");
+            for (Student student : bestStudents) { out.println(student.getNaam()); }
+            out.println("Zij hebben ieder " + bestStudent.getAmountSuccesses() + " examens gehaald!");
         }
 
     }
 
+    /**
+     *
+     */
     private void passedExams() {
-        System.out.println(showStudentList());
+        out.println(showStudentList());
         Student student = null;
-        if (!STUDENTLIST.isEmpty()) {
-            System.out.println("Van welk student wilt u de resultaten zien?");
+        if (!studentArrayList.isEmpty()) {
+            out.println("Van welk student wilt u de resultaten zien?");
 
             while (student == null) {
-                System.out.println("Vul zijn/haar studentnummer in:");
-                String studentNumber = READER.nextLine();
+                out.println("Vul zijn/haar studentnummer in:");
+                String studentNumber = reader.nextLine();
                 student = findStudentWithNumber(studentNumber);
                 if (student == null) {
-                    System.out.println("Student niet gevonden.");
+                    out.println("Student niet gevonden.");
                 }
             }
 
             if (!student.getStudentResultsList().isEmpty()) {
-                System.out.println("Dit zijn de resultaten van " + student.getNaam());
+                out.println("Dit zijn de resultaten van " + student.getNaam());
                 for (int i = 0; i < student.getStudentResultsList().size(); i++) {
-                    System.out.print(student.getStudentResultsList().get(i).getExam().getName() + " | ");
+                    out.print(student.getStudentResultsList().get(i).getExam().getName() + " | ");
                     if (student.getStudentResultsList().get(i).passed) {
-                        System.out.print("\033[0;32m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
+                        out.print("\033[0;32m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
                     } else {
-                        System.out.print("\033[0;31m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
+                        out.print("\033[0;31m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
                     }
                 }
             }
         }
     }
 
-    /***
+    /**
      * Removes students from the student list if given name and student number are equal to information in the list
      */
-
     private void removeStudents() {
-        if(!STUDENTLIST.isEmpty()){
+        if(!studentArrayList.isEmpty()){
             out.println("Vul jouw studentnummer in:");
-            String studentNumber = READER.nextLine();
+            String studentNumber = reader.nextLine();
             out.println("Vul jouw volledige naam in:");
-            String studentName = READER.nextLine();
+            String studentName = reader.nextLine();
 
-            if(STUDENTLIST.removeIf(student -> student.getNaam().equals(studentName) && student.getStudentnummer().equals(studentNumber))) {
+            if(studentArrayList.removeIf(student -> student.getNaam().equals(studentName) && student.getStudentnummer().equals(studentNumber))) {
                 out.println("Student " + studentName + " is verwijderd!");
             } else {
                 out.println("Deze student staat niet in het systeem.");
@@ -208,12 +232,12 @@ public class Menu {
     public void didStudentPassExam() {
         out.println(showStudentList());
         Student student = null;
-        if (!STUDENTLIST.isEmpty()) {
+        if (!studentArrayList.isEmpty()) {
             out.println("Van welk student wilt u een resultaat zien?");
 
             while (student == null) {
                 out.println("Vul zijn/haar studentnummer in:");
-                String studentNumber = READER.nextLine();
+                String studentNumber = reader.nextLine();
                 student = findStudentWithNumber(studentNumber);
                 if (student == null) {
                     out.println("Student niet gevonden.");
@@ -224,7 +248,7 @@ public class Menu {
             out.println(showExamList());
 
             int number = 0;
-            String choice = READER.nextLine();
+            String choice = reader.nextLine();
             try {
                 number = Integer.parseInt(choice);
             } catch (NumberFormatException ex) {
@@ -233,7 +257,7 @@ public class Menu {
 
             Result results = null;
             for (int i = 0; i < student.getStudentResultsList().size(); i++) {
-                if (EXAMS.get(number - 1) == student.getStudentResultsList().get(i).getExam()) {
+                if (examArrayList.get(number - 1) == student.getStudentResultsList().get(i).getExam()) {
                     results = student.getStudentResultsList().get(i);
                 }
             }
@@ -249,31 +273,32 @@ public class Menu {
         }
     }
 
-    /***
+    /**
      * Checks if in menu selected exam is available for exam attempt
+     * @param examChoice
      * @return
      */
-    public void isExamAvailable(int examChoice){
+    public boolean isExamAvailable(int examChoice){
         try {
-            EXAMTOTAKE = EXAMS.get(examChoice - 1);
-            out.println("test");
+            examToTake = examArrayList.get(examChoice - 1);
         } catch (Exception e) {
             out.println("Examen niet beschikbaar!");
         }
+        return false;
     }
 
-    /***
+    /**
      * If exam candidate is registered show the list of exams
      */
 
     private void selectStudent() {
         out.println(showStudentList());
         Student candidate = null;
-        if (!STUDENTLIST.isEmpty()) {
+        if (!studentArrayList.isEmpty()) {
 
             while (candidate == null) {
                 out.println("Vul jouw studentnummer in:");
-                String studentNumber = READER.nextLine();
+                String studentNumber = reader.nextLine();
                 candidate = findStudentWithNumber(studentNumber);
                 if (candidate == null) {
                     out.println("Student niet gevonden.");
@@ -281,17 +306,21 @@ public class Menu {
             }
         } else {
             out.println("Registreer eerst een student om een examen te doen...");
-            READER.nextLine();
+            reader.nextLine();
         }
         selectExam(candidate);
 
     }
 
+    /**
+     *
+     * @param candidate
+     */
     private void selectExam(Student candidate){
             out.println(showExamList());
 
             int number = 0;
-            String choice = READER.nextLine();
+            String choice = reader.nextLine();
             try {
                 number = Integer.parseInt(choice);
             } catch (NumberFormatException ex) {
@@ -299,37 +328,49 @@ public class Menu {
             }
 
             isExamAvailable(number);
-            EXAMATTEMPT.setExam(EXAMTOTAKE);
-            out.println(EXAMTOTAKE.getName());
+            examAttempt.setExam(examToTake);
+            out.println(examToTake.getName());
             takeExam(candidate);
     }
+
+    /**
+     *
+     * @param candidate
+     */
     private void takeExam(Student candidate) {
 
-            ArrayList<Question> examQuestions = EXAMTOTAKE.getQuestions();
-            Collections.shuffle(examQuestions);
+        ArrayList<Question> examQuestions = examToTake.getQuestions();
+        Collections.shuffle(examQuestions);
 
-            int amountCorrect = 0;
-            for (Question question : examQuestions) {
-                out.println(question.getQuestion());
+        int amountCorrect = 0;
+        for (Question question : examQuestions) {
+            out.println(question.getQuestion());
 
-                if (question.getChoice() != null) {
-                    for (String choise : question.getChoice()) {
-                        out.println(choise);
-                    }
-                }
-                String answer = READER.nextLine();
-                if (question.getAnswer().equals(answer)) {
-                    amountCorrect++;
-                    out.println("Goed!");
-                } else{
-                    out.println("Fout, het juiste antwoord was " + question.getAnswer());
+            if (question.getChoice() != null) {
+                for (String choise : question.getChoice()) {
+                    out.println(choise);
                 }
             }
-            addCandidateResult(amountCorrect,examQuestions, candidate);
-
+            String answer = reader.nextLine();
+            if (question.getAnswer().equals(answer)) {
+                amountCorrect++;
+                out.println("Goed!");
+            } else {
+                out.println("Fout, het juiste antwoord was " + question.getAnswer());
+            }
         }
+        addCandidateResult(amountCorrect, examQuestions, candidate);
+
+    }
+
+    /**
+     *
+     * @param amountCorrect
+     * @param examQuestions
+     * @param candidate
+     */
     public void addCandidateResult(int amountCorrect, ArrayList<Question> examQuestions, Student candidate){
-        candidate.addResult(new Result(EXAMTOTAKE, amountCorrect, hasPassed(EXAMTOTAKE, amountCorrect)));
+        candidate.addResult(new Result(examToTake, amountCorrect, hasPassed(examToTake, amountCorrect)));
         double questionSize = examQuestions.size();
         if (candidate.getStudentResults().passed) {
             out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", candidate.getStudentResults().getGrade());
@@ -339,31 +380,31 @@ public class Menu {
     }
 
 
-    /***
+    /**
      * Goes through each student in the student list and inserts them into the terminal with an ascending number
      */
     private String showStudentList() {
         StringBuilder students = new StringBuilder();
         students.append("Geregistreerde studenten: \n");
-        if (STUDENTLIST.isEmpty()) {
+        if (studentArrayList.isEmpty()) {
             out.println("Geen geregistreerde studenten gevonden...\nU word doorgestuurd naar student registratie");
             studentRegister();
         } else {
-            for(int i = 0; i < STUDENTLIST.size(); i++) {
-                students.append("\n[").append(i + 1).append("]").append(" ").append(STUDENTLIST.get(i).getNaam()).append(" ").append(STUDENTLIST.get(i).getStudentnummer());
+            for(int i = 0; i < studentArrayList.size(); i++) {
+                students.append("\n[").append(i + 1).append("]").append(" ").append(studentArrayList.get(i).getNaam()).append(" ").append(studentArrayList.get(i).getStudentnummer());
             }
         }
         return students.toString();
     }
-    /***
+    /**
      * Goes through each exam in the exam list and inserts them into the terminal with an ascending number
      */
     private String showExamList() {
         StringBuilder exams = new StringBuilder();
         exams.append("Kies een examen: \n");
-        for (Exam exam : EXAMS){
+        for (Exam exam : examArrayList){
             int i = 0;
-            if (i ++ == EXAMS.size() - 1) {
+            if (i ++ == examArrayList.size() - 1) {
                 exams.append("[").append(i).append("] ").append(exam.getName());
             } else {
                 exams.append("[").append(i).append("] ").append(exam.getName()).append("\n");
@@ -372,7 +413,7 @@ public class Menu {
         return exams.toString();
     }
 
-    /***
+    /**
      * Registers new students with their full name and student number into the exam program
      */
 
@@ -382,7 +423,7 @@ public class Menu {
 
         while (studentName.equals("")) {
             out.println("Vul jouw volledige naam in >");
-            String scanName = READER.nextLine().trim();
+            String scanName = reader.nextLine().trim();
             if (stringChecker.isFullName(scanName)) {
                 studentName = scanName;
             } else {
@@ -391,7 +432,7 @@ public class Menu {
         }
         while (studentNumber.equals("")) {
             out.println("Vul jouw studentnummer in >");
-            String scanNumber = READER.nextLine().trim();
+            String scanNumber = reader.nextLine().trim();
             if (stringChecker.isStudentNumber(scanNumber)) {
                 studentNumber = scanNumber;
             } else {
@@ -401,20 +442,21 @@ public class Menu {
 
         try {
             Student student = new Student(studentName, studentNumber);
-            STUDENTLIST.add(student);
+            studentArrayList.add(student);
             out.println("\u001B[0;32mDe student is met succes geregistreerd!\u001B[0m");
         } catch (Exception e) {
             out.println("\u001B[0;31mEr ging iets fout. Probeer het opnieuw!\u001B[0m");
         }
     }
 
-    /***
-     *
+    /**
      * Function that looks up an exam candidate in the student list
+     * @param studentNumber
+     * @return
      */
     private Student findStudentWithNumber(String studentNumber) {
         Student candidate;
-        for (Student value : STUDENTLIST) {
+        for (Student value : studentArrayList) {
             String student = value.getStudentnummer();
             if (Objects.equals(studentNumber, student)) {
                 candidate = value;
@@ -424,6 +466,12 @@ public class Menu {
         return null;
     }
 
+    /**
+     *
+     * @param exam
+     * @param amountPassed
+     * @return
+     */
     public boolean hasPassed(Exam exam, int amountPassed) {
         boolean result = false;
         ArrayList<Question> questions = exam.getQuestions();
