@@ -30,14 +30,12 @@ public class Menu {
 
         System.out.println("[X] Programma afsluiten");
         System.out.println("Voor uw keuze in:");
+
     }
 
-    /***
-     * Selection buttons for showMenu, proceeds with selected option
-     * @param choise
-     */
-    public void getChoise(String choise) {
-        switch (choise) {
+
+     public void getChoise(String Choice) {
+        switch (Choice) {
             case "1":
                 System.out.println(showExamList());
                 break;
@@ -62,15 +60,74 @@ public class Menu {
             case "8":
                 bestStudent();
             case "9":
-                Exam.addExam();
-                showMenu();
+                addExam();
                 break;
             case "`":
                 break;
-            default:
-                System.out.println(" is not a valid option choose again\n");
-                showMenu();
         }
+    }
+
+    public void addExam() {
+        System.out.println("Voer de naam van het nieuwe examen in");
+        String examName = READER.nextLine();
+        System.out.println("Voer het aantal vragen die je wilt maken in");
+        int AmountOfQuestions = READER.nextInt();
+        addMultipleChoiceExam(examName, AmountOfQuestions);
+
+     /*       System.out.println("[1] Meerkeuze vragen");
+            System.out.println("[2] Open vragen");
+            String b = READER.nextLine();
+
+            if (b.equals("a")) {
+                addMultipleChoiceExam(examName, AmountOfQuestions);
+            } else {
+                if (b.equals("b")) {
+                    addOpenQuestionExam(examName, AmountOfQuestions);
+                }
+            }*/
+
+    }
+
+    public void addOpenQuestionExam(String examName, int amountOfQuestions) {
+        ArrayList<Question> openQuestions = new ArrayList<>();
+        for(int i = 0; i <= amountOfQuestions -1 ; i ++){
+            System.out.println("Voer vraag in");
+            String question = READER.nextLine();
+            System.out.println("Voer antwoord in");
+            String answer = READER.nextLine();
+            System.out.println("Voer aantal punten in");
+            int points = READER.nextInt();
+            openQuestions.add(new Question(question,answer,points));
+        }
+        ExamList.ExamList.add(new Exam(examName,openQuestions));
+        System.out.println("Exam added to list");
+
+    }
+
+    private  void addMultipleChoiceExam(String examName, int amountOfQuestions) {
+        ArrayList<Question> MultipleChoiceQuestions = new ArrayList<>();
+        for(int i = 0; i <= amountOfQuestions -1 ; i ++) {
+            System.out.println("Voer vraag in");
+            String question = READER.nextLine();
+            System.out.println("Voer antwoord optie in");
+            String A = READER.nextLine();
+            System.out.println("Voer antwoord optie in");
+            String B = READER.nextLine();
+            System.out.println("Voer antwoord optie in");
+            String C = READER.nextLine();
+            System.out.println("Voer antwoord optie in");
+            String D = READER.nextLine();
+            System.out.println("Vul het juiste antwoord hoofdletter in");
+            String antwoord = READER.nextLine();
+            System.out.println("Voer aantal optie punten in");
+            int points = READER.nextInt();
+
+            MultipleChoiceQuestions.add(new Question(question, Question.questionOptions(A,B,C,D), antwoord, points));
+
+        }
+        ExamList.ExamList.add(new Exam(examName,MultipleChoiceQuestions));
+        System.out.println("Exam added to list");
+        return;
     }
 
     /***
@@ -133,8 +190,9 @@ public class Menu {
 
     /***
      * Checks if in menu selected exam is available for exam attempt
+     * @return
      */
-    public void isExamAvailable(int examChoice){
+    public boolean isExamAvailable(int examChoice){
         try {
             Exam exam = EXAMS.get(examChoice - 1);
             EXAMTOTAKE = exam;
@@ -142,6 +200,7 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("Examen niet beschikbaar!");
         }
+        return false;
     }
 
     /***
@@ -152,7 +211,6 @@ public class Menu {
         System.out.println(showStudentList());
         Student candidate = null;
         if (!STUDENTLIST.isEmpty()) {
-
 
             while (candidate == null) {
                 System.out.println("Vul jouw studentnummer in:");
@@ -244,9 +302,9 @@ public class Menu {
     private String showExamList() {
         StringBuilder exams = new StringBuilder();
         exams.append("Kies een examen: \n");
-        int i = 0;
         for (Exam exam : EXAMS){
-            if (i++ == EXAMS.size() - 1) {
+            int i = 0;
+            if (i ++ == EXAMS.size() - 1) {
                 exams.append("[").append(i).append("] ").append(exam.getName());
             } else {
                 exams.append("[").append(i).append("] ").append(exam.getName()).append("\n");
