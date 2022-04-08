@@ -64,6 +64,8 @@ public class Menu {
                 break;
             case "`":
                 break;
+
+            default: Menu.showMenu();
         }
     }
 
@@ -71,20 +73,18 @@ public class Menu {
         System.out.println("Voer de naam van het nieuwe examen in");
         String examName = READER.nextLine();
         System.out.println("Voer het aantal vragen die je wilt maken in");
-        int AmountOfQuestions = READER.nextInt();
-        addMultipleChoiceExam(examName, AmountOfQuestions);
-
-     /*       System.out.println("[1] Meerkeuze vragen");
+        int AmountOfQuestions = Integer.parseInt(READER.nextLine()); // Fixes problem that happens due to next int not going to the next line
+            System.out.println("[1] Meerkeuze vragen");
             System.out.println("[2] Open vragen");
             String b = READER.nextLine();
 
-            if (b.equals("a")) {
+            if (b.equals("1")) {
                 addMultipleChoiceExam(examName, AmountOfQuestions);
             } else {
-                if (b.equals("b")) {
+                if (b.equals("2")) {
                     addOpenQuestionExam(examName, AmountOfQuestions);
                 }
-            }*/
+            }
 
     }
 
@@ -96,7 +96,7 @@ public class Menu {
             System.out.println("Voer antwoord in");
             String answer = READER.nextLine();
             System.out.println("Voer aantal punten in");
-            int points = READER.nextInt();
+            int points = Integer.parseInt(READER.nextLine()); // Fixes problem that happens due to next int not going to the next line
             openQuestions.add(new Question(question,answer,points));
         }
         ExamList.ExamList.add(new Exam(examName,openQuestions));
@@ -120,14 +120,13 @@ public class Menu {
             System.out.println("Vul het juiste antwoord hoofdletter in");
             String antwoord = READER.nextLine();
             System.out.println("Voer aantal optie punten in");
-            int points = READER.nextInt();
+            int points = Integer.parseInt(READER.nextLine());// Fixes problem that happens due to next int not going to the next line
 
-            MultipleChoiceQuestions.add(new Question(question, Question.questionOptions(A,B,C,D), antwoord, points));
-
+            MultipleChoiceQuestions.add(new Question(question, Question.questionOptions(A, B, C, D), antwoord, points));
         }
+
         ExamList.ExamList.add(new Exam(examName,MultipleChoiceQuestions));
         System.out.println("Exam added to list");
-        return;
     }
 
     /***
@@ -192,7 +191,7 @@ public class Menu {
      * Checks if in menu selected exam is available for exam attempt
      * @return
      */
-    public boolean isExamAvailable(int examChoice){
+    public void isExamAvailable(int examChoice){
         try {
             Exam exam = EXAMS.get(examChoice - 1);
             EXAMTOTAKE = exam;
@@ -200,7 +199,6 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("Examen niet beschikbaar!");
         }
-        return false;
     }
 
     /***
@@ -216,7 +214,6 @@ public class Menu {
                 System.out.println("Vul jouw studentnummer in:");
                 String studentNumber = READER.nextLine();
                 candidate = findStudentWithNumber(studentNumber);
-                selectExam(candidate);
                 if (candidate == null) {
                     System.out.println("Student niet gevonden.");
                 }
@@ -225,6 +222,7 @@ public class Menu {
             System.out.println("Registreer eerst een student om een examen te doen...");
             READER.nextLine();
         }
+        selectExam(candidate);
 
     }
 
