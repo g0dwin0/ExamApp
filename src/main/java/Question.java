@@ -5,7 +5,7 @@ public class Question {
 //    private String antwoorden; // TODO: Abstracte klasse prolly the best here
     private String answer;
     private ArrayList<String> choice;
-    private int points;
+    private final int points;
 
     public Question(String question, String answer, int points) {
         this.question = question;

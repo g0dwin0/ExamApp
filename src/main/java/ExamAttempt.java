@@ -1,6 +1,6 @@
 public class ExamAttempt {
 
-    private boolean passed;
+    private final boolean passed;
     private Exam exam;
 
     public ExamAttempt(boolean passed){this.passed = passed;}
