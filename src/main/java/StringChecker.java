@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class StringChecker {
 
     public boolean isFullName(String name) {
-        String regx = "^[a-zA-Z\\s]+";
+        String regx = "^[a-zA-Z_ ]*$";
         Pattern pattern = Pattern.compile(regx,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(name);
         return matcher.find() && name.length() > 2 && name.contains(" ");
