@@ -1,8 +1,9 @@
+package examapp;
+
 import java.util.ArrayList;
 
 public class Question {
     private String question;
-//    private String antwoorden; // TODO: Abstracte klasse prolly the best here
     private String answer;
     private ArrayList<String> choice;
     private final int points;
@@ -50,7 +51,7 @@ public class Question {
 
         return openQuestion;
     }
-    public static ArrayList<Question> MultipleChoiceQuestion(){
+    public static ArrayList<Question> multipleChoiceQuestion(){
         ArrayList<Question> multipleChoiceQuestion = new ArrayList<>();
         multipleChoiceQuestion.add(new Question("Welk land heeft de grootste landopervlakte", questionOptions("Amerika","Australie","China","Rusland"),"D", 2));
         multipleChoiceQuestion.add(new Question("Welk land ", questionOptions("Amerika","Australie","China","Rusland"),"D", 2));

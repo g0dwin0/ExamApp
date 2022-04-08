@@ -1,3 +1,5 @@
+package examapp;
+
 import java.util.ArrayList;
 
 public class Student {

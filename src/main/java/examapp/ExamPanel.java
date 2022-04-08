@@ -1,4 +1,8 @@
+package examapp;
+
 import java.util.Scanner;
+
+import static java.lang.System.out;
 
 public class ExamPanel {
 
@@ -7,7 +11,7 @@ public class ExamPanel {
 
     public void startProgram() {
 
-        System.out.println("""
+        out.println("""
 
                 ███████╗██╗░░██╗░█████╗░███╗░░░███╗  ██████╗░░█████╗░███╗░░██╗███████╗██╗░░░░░  ███████╗░█████╗░
                 ██╔════╝╚██╗██╔╝██╔══██╗████╗░████║  ██╔══██╗██╔══██╗████╗░██║██╔════╝██║░░░░░  ╚════██║██╔══██╗
@@ -18,12 +22,12 @@ public class ExamPanel {
 
         Menu.showMenu();
 
-        String Choice = "";
+        String choice = "";
 
-        while(!Choice.equals("x")) {
-            Choice = READER.nextLine();
-            MENU.getChoise(Choice);
-//            if(!Choice.equals("x")){
+        while(!choice.equals("x")) {
+            choice = READER.nextLine();
+            MENU.getChoise(choice);
+//            if(!choice.equals("x")){
 //                Menu.showMenu();
 //            }
         }

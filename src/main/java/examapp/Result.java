@@ -1,3 +1,5 @@
+package examapp;
+
 public class Result {
     private Exam exam;
     private Integer amountCorrect;

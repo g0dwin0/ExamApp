@@ -1,3 +1,5 @@
+package examapp;
+
 public class ExamAttempt {
 
     private final boolean passed;
