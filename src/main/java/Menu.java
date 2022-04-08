@@ -178,12 +178,29 @@ public class Menu {
             System.out.println("En van welk examen wilt u het resultaat van deze student zien?");
             System.out.println(showExamList());
 
-            while (!READER.hasNextInt()) {
-                READER.next();
+            int number = 0;
+            String choice = READER.nextLine();
+            try {
+                number = Integer.parseInt(choice);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
             }
-            int choice = READER.nextInt();
 
-            System.out.println(student.getStudentResults().passed);
+            Result results = null;
+            for (int i = 0; i < student.getStudentResultsList().size(); i++) {
+                if (EXAMS.get(number - 1) == student.getStudentResultsList().get(i).getExam()) {
+                    results = student.getStudentResultsList().get(i);
+                }
+            }
+            if (results == null) {
+                System.out.println("De gekozen student heeft dit examen nog niet geprobeerd.");
+            } else {
+                if (results.passed) {
+                    System.out.printf("De gekozen student heeft de toets gehaald! Dit is zijn/haar cijfer: %.1f", results.getGrade());
+                } else {
+                    System.out.printf("De gekozen student heeft de toets niet gehaald! Dit is zijn/haar cijfer: %.1f", results.getGrade());
+                }
+            }
         }
     }
 
@@ -271,9 +288,9 @@ public class Menu {
         candidate.addResult(new Result(EXAMTOTAKE, amountCorrect, hasPassed(EXAMTOTAKE, amountCorrect)));
         double questionSize = examQuestions.size();
         if (candidate.getStudentResults().passed) {
-            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", ((double)amountCorrect / questionSize * 10.0));
+            System.out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", candidate.getStudentResults().getGrade());
         } else {
-            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", ((double) amountCorrect / questionSize * 10.0));
+            System.out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", candidate.getStudentResults().getGrade());
         }
     }
 

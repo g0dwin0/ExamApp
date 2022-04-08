@@ -25,6 +25,9 @@ public class Result {
         this.amountCorrect = amountCorrect;
     }
 
+    public double getGrade() {
+        return (double) amountCorrect / exam.getQuestions().size() * 10.0;
+    }
 
 
 }

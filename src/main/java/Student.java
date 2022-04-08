@@ -25,4 +25,6 @@ public class Student {
     public Result getStudentResults(){
         return studentResults.get(studentResults.size() - 1);
     }
+
+    public ArrayList<Result> getStudentResultsList() { return  this.studentResults; }
 }
