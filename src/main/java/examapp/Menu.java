@@ -161,16 +161,16 @@ public class Menu {
         int highestNumberOfSuccesses = bestStudent.getAmountSuccesses();
         for (Student student : studentArrayList) {
             if (student.getAmountSuccesses() == highestNumberOfSuccesses) {
-                out.println(student.getNaam());
+                out.println(student.getStudentName());
                 bestStudents.add(student);
             }
         }
         if (bestStudents.size() == 1) {
-            out.println("Deze student heeft de meest behaalde examens: " + bestStudent.getNaam() + "\n" +
+            out.println("Deze student heeft de meest behaalde examens: " + bestStudent.getStudentName() + "\n" +
                     "Deze student heeft " + bestStudent.getAmountSuccesses() + " examens gehaald!");
         } else {
             out.println("Dit zijn de studenten met de meest behaalde examens:");
-            for (Student student : bestStudents) { out.println(student.getNaam()); }
+            for (Student student : bestStudents) { out.println(student.getStudentName()); }
             out.println("Zij hebben ieder " + bestStudent.getAmountSuccesses() + " examens gehaald!");
         }
 
@@ -195,7 +195,7 @@ public class Menu {
             }
 
             if (!student.getStudentResultsList().isEmpty()) {
-                out.println("Dit zijn de resultaten van " + student.getNaam());
+                out.println("Dit zijn de resultaten van " + student.getStudentName());
                 for (int i = 0; i < student.getStudentResultsList().size(); i++) {
                     out.print(student.getStudentResultsList().get(i).getExam().getName() + " | ");
                     if (student.getStudentResultsList().get(i).passed) {
@@ -218,7 +218,7 @@ public class Menu {
             out.println("Vul jouw volledige naam in:");
             String studentName = reader.nextLine();
 
-            if(studentArrayList.removeIf(student -> student.getNaam().equals(studentName) && student.getStudentnummer().equals(studentNumber))) {
+            if(studentArrayList.removeIf(student -> student.getStudentName().equals(studentName) && student.getStudentnumber().equals(studentNumber))) {
                 out.println("Student " + studentName + " is verwijderd!");
             } else {
                 out.println("Deze student staat niet in het systeem.");
@@ -372,10 +372,10 @@ public class Menu {
     public void addCandidateResult(int amountCorrect, ArrayList<Question> examQuestions, Student candidate){
         candidate.addResult(new Result(examToTake, amountCorrect, hasPassed(examToTake, amountCorrect)));
         double questionSize = examQuestions.size();
-        if (candidate.getStudentResults().passed) {
-            out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", candidate.getStudentResults().getGrade());
+        if (candidate.getResult().passed) {
+            out.printf("Je hebt de toets gehaald! Dit is jouw resultaat: %.1f", candidate.getResult().getGrade());
         } else {
-            out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", candidate.getStudentResults().getGrade());
+            out.printf("Je hebt de toets niet gehaald... Dit is jouw resultaat: %.1f", candidate.getResult().getGrade());
         }
     }
 
@@ -391,7 +391,7 @@ public class Menu {
             studentRegister();
         } else {
             for(int i = 0; i < studentArrayList.size(); i++) {
-                students.append("\n[").append(i + 1).append("]").append(" ").append(studentArrayList.get(i).getNaam()).append(" ").append(studentArrayList.get(i).getStudentnummer());
+                students.append("\n[").append(i + 1).append("]").append(" ").append(studentArrayList.get(i).getStudentName()).append(" ").append(studentArrayList.get(i).getStudentnumber());
             }
         }
         return students.toString();
@@ -457,7 +457,7 @@ public class Menu {
     private Student findStudentWithNumber(String studentNumber) {
         Student candidate;
         for (Student value : studentArrayList) {
-            String student = value.getStudentnummer();
+            String student = value.getStudentnumber();
             if (Objects.equals(studentNumber, student)) {
                 candidate = value;
                 return candidate;

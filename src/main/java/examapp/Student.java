@@ -16,15 +16,15 @@ public class Student {
 
     }
 
-    public String getNaam() {return studentName;}
+    public String getStudentName() {return studentName;}
 
-    public String getStudentnummer() {return  studentNumber;}
+    public String getStudentnumber() {return  studentNumber;}
 
-    public void setNaam(String name) {this.studentName = name;}
+    public void setStudentName(String name) {this.studentName = name;}
 
     public void addResult(Result result) {this.studentResults.add(result);}
 
-    public Result getStudentResults(){
+    public Result getResult(){
         return studentResults.get(studentResults.size() - 1);
     }
 
@@ -32,8 +32,8 @@ public class Student {
 
     public int getAmountSuccesses() {
         int amountSuccess = 0;
-        for (int i = 0; i < studentResults.size(); i++) {
-            if (studentResults.get(i).passed) {
+        for (Result studentResult : studentResults) {
+            if (studentResult.passed) {
                 amountSuccess++;
             }
         }

@@ -24,19 +24,19 @@ class StudentTest {
         studentUnderTest.addResult(result1);
     }
     @Test
-    void testGetNaam() {
+    void testGetStudentName() {
         assertEquals("Rowin Hartog", studentUnderTest.getStudentName());
     }
 
     @Test
-    void testGetStudentnummer() {
-        assertEquals("19092113", studentUnderTest.getStudentnummer());
+    void testGetStudentnumber() {
+        assertEquals("19092113", studentUnderTest.getStudentnumber());
     }
 
     @Test
-    void testSetNaam() {
+    void testSetStudentName() {
 
-        studentUnderTest.setNaam("Rowin Hartogg");
+        studentUnderTest.setStudentName("Rowin Hartogg");
         assertEquals("Rowin Hartogg",studentUnderTest.getStudentName());
     }
 
@@ -47,7 +47,7 @@ class StudentTest {
                 List.of(new Question("question", new ArrayList<>(List.of("value")), "answer", 100)))), 10, true);
 
         studentUnderTest.addResult(result);
-        Assertions.assertEquals(result,studentUnderTest.getResult(result));
+        Assertions.assertEquals(result,studentUnderTest.getResult());
     }
 
     @Test
@@ -64,9 +64,9 @@ class StudentTest {
                 List.of(new Question("question", new ArrayList<>(List.of("value")), "answer", 0)))), 12, true);
         studentUnderTest.addResult(result);
 
-        final Result result2 = studentUnderTest.getResult(result);
-        Assertions.assertEquals(result2,studentUnderTest.getResult(result));
-        assertTrue(studentUnderTest.getStudentResultsList().get(2).passed);
+        final Result result2 = studentUnderTest.getResult();
+        Assertions.assertEquals(result2,studentUnderTest.getResult());
+        Assertions.assertTrue(studentUnderTest.getStudentResultsList().get(2).passed);
         assertEquals("name1",studentUnderTest.getStudentResultsList().get(2).getExam().getName());
         assertEquals(12,studentUnderTest.getStudentResultsList().get(2).getAmountCorrect());
 
