@@ -14,8 +14,8 @@ public class StringChecker {
 
     public boolean isStudentNumber(String studentNumber) {
         String regx = "[0-9]+";
-        Pattern pattern = Pattern.compile(regx,Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(regx);
         Matcher matcher = pattern.matcher(studentNumber);
-        return matcher.find() && studentNumber.length() > 4;
+        return matcher.matches() && studentNumber.length() > 4;
     }
 }
