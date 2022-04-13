@@ -61,7 +61,8 @@ public class Menu {
             case "`":
                 break;
 
-            default:
+            default :
+                Menu.showMenu();
         }
     }
 
@@ -401,13 +402,12 @@ public class Menu {
      */
     private String showExamList() {
         StringBuilder exams = new StringBuilder();
-        exams.append("Kies een examen: \n");
-        for (Exam exam : examArrayList){
-            int i = 0;
-            if (i ++ == examArrayList.size() - 1) {
-                exams.append("[").append(i).append("] ").append(exam.getName());
+        exams.append("Beschikbare examens: \n");
+        for (int i = 0; i < examArrayList.size(); i++){
+            if (i + 1 == examArrayList.size()) {
+                exams.append("[").append(i + 1).append("] ").append(examArrayList.get(i).getName());
             } else {
-                exams.append("[").append(i).append("] ").append(exam.getName()).append("\n");
+                exams.append("[").append(i + 1).append("] ").append(examArrayList.get(i).getName()).append("\n");
             }
         }
         return exams.toString();
