@@ -434,9 +434,18 @@ public class Menu {
             out.println("Vul jouw studentnummer in >");
             String scanNumber = reader.nextLine().trim();
             if (stringChecker.isStudentNumber(scanNumber)) {
-                studentNumber = scanNumber;
+                boolean unique = true;
+                for (Student student : studentArrayList) {
+                    if (Objects.equals(student.getStudentnumber(), scanNumber)) {
+                        out.println("\u001B[0;31mDeze student is al geregistreerd!\u001B[0m");
+                        unique = false;
+                    }
+                }
+                if (unique) {
+                    studentNumber = scanNumber;
+                }
             } else {
-                out.println("\u001B[0;31mVul een geldig studentnummer in!!\u001B[0m");
+                out.println("\u001B[0;31mVul een geldig studentnummer in!\u001B[0m");
             }
         }
 
