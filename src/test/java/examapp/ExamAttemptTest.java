@@ -5,6 +5,9 @@ import org.junit.Test;
 
 public class ExamAttemptTest {
 
+    /***
+     * Checked of een nieuwe examen poging gehaald of niet gehaald kan zijn
+     */
     @Test
     public void testExamAttempt() {
         ExamAttempt examAttempt1 = new ExamAttempt(false);
@@ -12,6 +15,9 @@ public class ExamAttemptTest {
         Assert.assertNotSame(examAttempt1, examAttempt2);
     }
 
+    /***
+     * Checked of een examen geselecteerd kan worden
+     */
     @Test
     public void testSetExam() {
         Exam exam = new Exam();

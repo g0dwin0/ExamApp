@@ -21,22 +21,34 @@ class ExamListTest {
         examList.getExamList().clear();
     }
 
+    /***
+     * Test het opvragen van een naam van een examen in de arraylist in een specifieke positie
+     */
     @Test
     public void testExamListExam1() {
         Assertions.assertEquals("Open Vragen", examList.examArrayList.get(0).getName());
     }
 
+    /***
+     * Test het opvragen van een naam van een examen in de arraylist in een specifieke positie
+     */
     @Test
     public void testExamListExam2() {
         Assertions.assertEquals("Meerkeuze Vragen", examList.examArrayList.get(1).getName());
     }
 
+    /***
+     * Test of een nieuw toegevoegd examen in de examenlijst staat
+     */
     @Test
     public void testExamListExam3() {
         examList.examArrayList.add(new Exam("Meerkeuze Toets", Question.multipleChoiceQuestion()));
         Assertions.assertEquals("Meerkeuze Toets", examList.examArrayList.get(2).getName());
     }
 
+    /***
+     * Test het ophalen van de examenlijst
+     */
     @Test
     public void testGetExamList() {
         ArrayList<Exam> exams = new ArrayList<>();
@@ -47,6 +59,9 @@ class ExamListTest {
         }
     }
 
+    /***
+     * Test het ophalen van examen met open vragen
+     */
     @Test
     public void testGetExamList_openQuestions() {
         ArrayList<Question> openQuestions = Question.openQuestion();
@@ -57,6 +72,9 @@ class ExamListTest {
 
     }
 
+    /***
+     * Test het ophalen van een examen met meerkeuze vragen
+     */
     @Test
     public void testGetExamList_multipleChoiceQuestions() {
         ArrayList<Question> openQuestions = Question.multipleChoiceQuestion();

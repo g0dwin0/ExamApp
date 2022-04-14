@@ -20,7 +20,7 @@ public class Menu {
      */
     public static void showMenu() {
         out.println();
-        for (String s : Arrays.asList("[1] Examen lijst", "[2] Studenten lijst", "[3] Student registreren", "[4] Student verwijderen", "[5] Examen doen", "[6] Heeft de student het examen gehaald?", "[7] Welke examens heeft de student gehaald?", "[8] Welk student heeft de meeste examens gehaald?", "[9] Students passed for exam", "[10] Examen toevoegen", "[X] Programma afsluiten", "Voor uw keuze in:")) {
+        for (String s : Arrays.asList("[1] Examen lijst", "[2] Studenten lijst", "[3] Student registreren", "[4] Student verwijderen", "[5] Examen doen", "[6] Heeft de student het examen gehaald?", "[7] Welke examens heeft de student gehaald?", "[8] Welk student heeft de meeste examens gehaald?", "[9] Examen toevoegen", "[X] Programma afsluiten", "Voor uw keuze in:")) {
             out.println(s);
         }
 
@@ -56,9 +56,6 @@ public class Menu {
                 bestStudent();
                 break;
             case "9":
-                studentsPassedForExam();
-                break;
-            case "10":
                 addExam();
                 break;
             case "`":
@@ -68,34 +65,6 @@ public class Menu {
                 Menu.showMenu();
         }
     }
-/*
-    private void studentsPassedForExam() {
-        out.println(showExamList());
-
-        int number = 0;
-        String choice = reader.nextLine();
-        try {
-            number = Integer.parseInt(choice);
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-        }
-
-        Result results = null;
-        for (int i = 0; i < examList.getExamList().size(); i++) {
-            for (Student student : studentArrayList) {
-                results = student.getStudentResultsList().get(i);
-                if (results.passed) {
-                    out.println(student.getStudentName() + results.getGrade());
-
-                }   else {
-                    out.print("De ");
-                }
-
-            }
-            showMenu();
-        }
-    }
-*/
 
     /**
      * Student can select their name and see their exam results for a specific exam
