@@ -205,6 +205,8 @@ public class Menu {
                         out.print("\033[0;31m" + student.getStudentResultsList().get(i).getGrade() + "\033[0m\n");
                     }
                 }
+            } else {
+                out.println(student.getStudentName() + " heeft nog geen examens gedaan!");
             }
         }
     }
