@@ -3,8 +3,8 @@ package examapp;
 import java.util.ArrayList;
 
 public class Question {
-    private String question;
-    private String answer;
+    private final String question;
+    private final String answer;
     private ArrayList<String> choice;
     private final int points;
 
@@ -25,20 +25,9 @@ public class Question {
         return question;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
     public String getAnswer() {
         return answer;
     }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public int getPoints() {return points;}
-
 
     public ArrayList<String> getChoice() {return choice;}
 

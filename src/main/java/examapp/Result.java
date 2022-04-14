@@ -15,16 +15,8 @@ public class Result {
         return exam;
     }
 
-    public void setExam(Exam exam) {
-        this.exam = exam;
-    }
-
     public Integer getAmountCorrect() {
         return amountCorrect;
-    }
-
-    public void setAmountCorrect(Integer amountCorrect) {
-        this.amountCorrect = amountCorrect;
     }
 
     public double getGrade() {

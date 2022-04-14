@@ -482,7 +482,7 @@ public class Menu {
      * @return
      */
     public boolean hasPassed(Exam exam, int amountPassed) {
-        boolean result = false;
+        boolean result;
         ArrayList<Question> questions = exam.getQuestions();
         double cijfer = (double) amountPassed / questions.size() * 10.0;
         result = 5.5 <= cijfer;
