@@ -29,7 +29,7 @@ public class Menu {
     /**
      * Redirects to the selected option from showMenu
      */
-    public void getChoise(String choice) {
+    public void getChoice(String choice) {
         switch (choice) {
             case "1":
                 out.println(showExamList());
