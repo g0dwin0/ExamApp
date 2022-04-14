@@ -23,23 +23,33 @@ class StudentTest {
         studentUnderTest.addResult(result);
         studentUnderTest.addResult(result1);
     }
+    /**
+     * Checks if student name is returned correctly
+     */
     @Test
     void testGetStudentName() {
         assertEquals("Rowin Hartog", studentUnderTest.getStudentName());
     }
-
+    /**
+     * Checks if student number is returned correctly
+     */
     @Test
     void testGetStudentnumber() {
         assertEquals("19092113", studentUnderTest.getStudentnumber());
     }
 
+    /**
+     * Checks if student name sets and is returned correctly
+     */
     @Test
     void testSetStudentName() {
 
         studentUnderTest.setStudentName("Rowin Hartogg");
         assertEquals("Rowin Hartogg",studentUnderTest.getStudentName());
     }
-
+    /**
+     * Checks if student result is added correctly
+     */
     @Test
     void testAddResult() {
 
@@ -50,13 +60,18 @@ class StudentTest {
         Assertions.assertEquals(result,studentUnderTest.getResult());
     }
 
+    /**
+     * Checks if student exam outcome is a success
+     */
     @Test
     void testGetAmountSuccesses() {
         final int outcome = studentUnderTest.getAmountSuccesses();
 
         assertEquals(1, outcome);
     }
-
+    /**
+     * Checks the results of a student
+     */
     @Test
     void testGetResult() {
         // Setup

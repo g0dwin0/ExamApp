@@ -39,4 +39,8 @@ public class Student {
         }
         return amountSuccess;
     }
+
+    public Result getResult(Result result) {
+        return result;
+    }
 }

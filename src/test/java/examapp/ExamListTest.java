@@ -1,5 +1,6 @@
 package examapp;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,13 @@ class ExamListTest {
 
     @BeforeEach
     void setUp() {
+
         examList = new ExamList();
+    }
+
+    @AfterEach
+    void close(){
+        examList.getExamList().clear();
     }
 
     @Test

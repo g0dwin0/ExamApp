@@ -20,7 +20,7 @@ public class Menu {
      */
     public static void showMenu() {
         out.println();
-        for (String s : Arrays.asList("[1] Examen lijst", "[2] Studenten lijst", "[3] Student registreren", "[4] Student verwijderen", "[5] Examen doen", "[6] Heeft de student het examen gehaald?", "[7] Welke examens heeft de student gehaald?", "[8] Welk student heeft de meeste examens gehaald?", "[9] Examen toevoegen", "[X] Programma afsluiten", "Voor uw keuze in:")) {
+        for (String s : Arrays.asList("[1] Examen lijst", "[2] Studenten lijst", "[3] Student registreren", "[4] Student verwijderen", "[5] Examen doen", "[6] Heeft de student het examen gehaald?", "[7] Welke examens heeft de student gehaald?", "[8] Welk student heeft de meeste examens gehaald?", "[9] Students passed for exam", "[10] Examen toevoegen", "[X] Programma afsluiten", "Voor uw keuze in:")) {
             out.println(s);
         }
 
@@ -29,7 +29,7 @@ public class Menu {
     /**
      * Redirects to the selected option from showMenu
      */
-     public void getChoise(String choice) {
+    public void getChoise(String choice) {
         switch (choice) {
             case "1":
                 out.println(showExamList());
@@ -56,15 +56,70 @@ public class Menu {
                 bestStudent();
                 break;
             case "9":
+                studentsPassedForExam();
+                break;
+            case "10":
                 addExam();
                 break;
             case "`":
                 break;
 
-            default :
+            default:
                 Menu.showMenu();
         }
     }
+
+    private void studentsPassedForExam() {
+    }
+
+    /**
+     * Student can select their name and see their exam results for a specific exam
+     */
+    public void didStudentPassExam() {
+        out.println(showStudentList());
+        Student student = null;
+        if (!studentArrayList.isEmpty()) {
+            out.println("Van welk student wilt u een resultaat zien?");
+
+            while (student == null) {
+                out.println("Vul zijn/haar studentnummer in:");
+                String studentNumber = reader.nextLine();
+                student = findStudentWithNumber(studentNumber);
+                if (student == null) {
+                    out.println("Student niet gevonden.");
+                }
+            }
+
+            out.println("En van welk examen wilt u het resultaat van deze student zien?");
+            out.println(showExamList());
+
+            int number = 0;
+            String choice = reader.nextLine();
+            try {
+                number = Integer.parseInt(choice);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
+
+            Result results = null;
+            for (int i = 0; i < student.getStudentResultsList().size(); i++) {
+                if (examArrayList.get(number - 1) == student.getStudentResultsList().get(i).getExam()) {
+                    results = student.getStudentResultsList().get(i);
+                }
+            }
+            if (results == null) {
+                out.println("De gekozen student heeft dit examen nog niet geprobeerd.");
+            } else {
+                if (results.passed) {
+                    out.printf("De gekozen student heeft de toets gehaald! Dit is zijn/haar cijfer: %.1f", results.getGrade());
+                } else {
+                    out.printf("De gekozen student heeft de toets niet gehaald! Dit is zijn/haar cijfer: %.1f", results.getGrade());
+                }
+            }
+        }
+    }
+
+
 
     /**
      * Startup of adding exams by making your first choices like the name, amount of questions and the type of exam you would like to create
@@ -178,7 +233,7 @@ public class Menu {
     }
 
     /**
-     *
+     * Student can select their name and see their exams results
      */
     private void passedExams() {
         out.println(showStudentList());
@@ -232,50 +287,6 @@ public class Menu {
         }
     }
 
-    public void didStudentPassExam() {
-        out.println(showStudentList());
-        Student student = null;
-        if (!studentArrayList.isEmpty()) {
-            out.println("Van welk student wilt u een resultaat zien?");
-
-            while (student == null) {
-                out.println("Vul zijn/haar studentnummer in:");
-                String studentNumber = reader.nextLine();
-                student = findStudentWithNumber(studentNumber);
-                if (student == null) {
-                    out.println("Student niet gevonden.");
-                }
-            }
-
-            out.println("En van welk examen wilt u het resultaat van deze student zien?");
-            out.println(showExamList());
-
-            int number = 0;
-            String choice = reader.nextLine();
-            try {
-                number = Integer.parseInt(choice);
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
-            }
-
-            Result results = null;
-            for (int i = 0; i < student.getStudentResultsList().size(); i++) {
-                if (examArrayList.get(number - 1) == student.getStudentResultsList().get(i).getExam()) {
-                    results = student.getStudentResultsList().get(i);
-                }
-            }
-            if (results == null) {
-                out.println("De gekozen student heeft dit examen nog niet geprobeerd.");
-            } else {
-                if (results.passed) {
-                    out.printf("De gekozen student heeft de toets gehaald! Dit is zijn/haar cijfer: %.1f", results.getGrade());
-                } else {
-                    out.printf("De gekozen student heeft de toets niet gehaald! Dit is zijn/haar cijfer: %.1f", results.getGrade());
-                }
-            }
-        }
-    }
-
     /**
      * Checks if in menu selected exam is available for exam attempt
      * @param examChoice
@@ -317,7 +328,7 @@ public class Menu {
 
     /**
      *
-     * @param candidate
+     * @param candidate given bij selectStudent() method to proceed with taking an exam
      */
     private void selectExam(Student candidate){
             out.println(showExamList());
@@ -338,7 +349,7 @@ public class Menu {
 
     /**
      *
-     * @param candidate
+     * @param candidate  given bij selectExam() method to proceed with taking an exam
      */
     private void takeExam(Student candidate) {
 
@@ -368,9 +379,9 @@ public class Menu {
 
     /**
      *
-     * @param amountCorrect
-     * @param examQuestions
-     * @param candidate
+     * @param amountCorrect  given bij takeExam() method to conclude the exam and finalize the results for the student
+     * @param examQuestions  given bij takeExam() method to conclude the exam and finalize the results for the student
+     * @param candidate  given bij takeExam() method to continu tracking the student taking the exam
      */
     public void addCandidateResult(int amountCorrect, ArrayList<Question> examQuestions, Student candidate){
         candidate.addResult(new Result(examToTake, amountCorrect, hasPassed(examToTake, amountCorrect)));
@@ -386,7 +397,7 @@ public class Menu {
     /**
      * Goes through each student in the student list and inserts them into the terminal with an ascending number
      */
-    private String showStudentList() {
+    public String showStudentList() {
         StringBuilder students = new StringBuilder();
         students.append("Geregistreerde studenten: \n");
         if (studentArrayList.isEmpty()) {
@@ -402,7 +413,7 @@ public class Menu {
     /**
      * Goes through each exam in the exam list and inserts them into the terminal with an ascending number
      */
-    private String showExamList() {
+    public String showExamList() {
         StringBuilder exams = new StringBuilder();
         exams.append("Beschikbare examens: \n");
         for (int i = 0; i < examArrayList.size(); i++){

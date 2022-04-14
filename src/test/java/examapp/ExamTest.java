@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class ExamTest {
 
+
     @Test
     public void testExam() {
         ArrayList<Question> questions = new ArrayList<>();
@@ -22,12 +23,17 @@ public class ExamTest {
         Assert.assertNull(exam.getQuestions());
     }
 
+    /**
+     * Checks if exam name is requested correctly
+     */
     @Test
     public void testGetName() {
         Exam exam = new Exam("Security",null);
         Assert.assertEquals("Security",exam.getName());
     }
-
+    /**
+     * Checks if exam questions are returned correctly
+     */
     @Test
     public void testGetQuestions() {
         ArrayList<Question> questions = new ArrayList<>();

@@ -16,6 +16,6 @@ public class StringChecker {
         String regx = "[0-9]+";
         Pattern pattern = Pattern.compile(regx);
         Matcher matcher = pattern.matcher(studentNumber);
-        return matcher.matches() && studentNumber.length() > 4;
+        return matcher.matches() && studentNumber.length() == 8;
     }
 }
